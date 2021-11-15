@@ -10,4 +10,5 @@ a kpsfmkpfhmktpr
 
 h rtkhmrtkohm rt
 
-![use case1](\UML\use case1.png)
+![usecase1](\UML\usecase1.png)
+
