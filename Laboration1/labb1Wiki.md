@@ -2,7 +2,7 @@
 
 ### Use case
 
-asdkofma asofkmaso fmasof masofkmasfmas
+asdkofma afsofkmaso fmasof masofkmasfmas
 
 askfmasokfmasf asf amskf 
 
@@ -10,5 +10,5 @@ a kpsfmkpfhmktpr
 
 h rtkhmrtkohm rt
 
-![usecase1](\UML\usecase1.png)
+![usecase1](/UML/usecase1.png)
 
