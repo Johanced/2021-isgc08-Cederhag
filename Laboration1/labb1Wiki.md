@@ -2,13 +2,7 @@
 
 ### Use case
 
-masofkmasfmas
-
-askfmasokfmasf asf amskf 
-
-a kpsfmkpfhmktpr
-
-h rtkhmrtkohm rt
+Lorem ipsum bla bla hey Och Hå!
 
 ![usecase1](./UML/usecase1.png)
 
