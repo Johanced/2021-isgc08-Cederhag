@@ -2,7 +2,9 @@
 
 ### Use case
 
-asdkofma afsofkmaso fmasof masofkmasfmas
+asdkofma af![use case1](C:\Users\johan\git\ISGC08\labb1\use cases\use case1.png)sofkmaso fmasof 
+
+masofkmasfmas
 
 askfmasokfmasf asf amskf 
 
