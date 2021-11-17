@@ -35,23 +35,23 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ![usecase1](./UML/usecase1.png)
 
-### new file (Analys)
+### new file sekvens (Analys)
 
 ![newFile.drawio](./UML/newFile.drawio.png)
 
-### open file (Analys)
+### open file sekvens(Analys)
 
 ![openfile.drawio](./UML/openfile.drawio.png)
 
-### save as File (Analys)
+### save as File sekvens (Analys)
 
 ![saveAsFile.drawio](./UML/saveAsFile.drawio.png)
 
-### save file(Original alt) (Analys)
+### save file sekvens (Original alt) (Analys)
 
 ![saveFile(originalalt).drawio](./UML/saveFile(originalalt).drawio.png)
 
-### save file (Alt 1)
+### save file sekvens(Alt 1)
 
 ![saveFile(Alt1).drawio](./UML/saveFile(Alt1).drawio.png)
 
