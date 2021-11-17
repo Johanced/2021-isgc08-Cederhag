@@ -4,13 +4,11 @@
 
 **Kravspecifikation och beskrivning av projekt**
 
-Programmets beskrivning i text
-
 Min design ska beskriva och konceptualisera en enkel textredigerare, likt 'notepad'. Användaren kan skriva och redigera text i programmet för att sedan spara texten till fil. Användaren kan välja att öppna en redan befintlig fil eller skapa en ny tom fil.
 
 **Exempel på layout:**
 
-![uiExample](./UML/uiExample.png)
+![uiExample](./UML/uiExample.PNG)
 
 Filhantering ska göra det möjligt att lagra data så att den kvarstår. Användaren ska kunna göra följande operationer:
 
@@ -43,7 +41,7 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ### open file (Analys)
 
-![openfile.drawio](./UML/openFile.drawio.png)
+![openfile.drawio](./UML/openfile.drawio.png)
 
 ### save as File (Analys)'
 
