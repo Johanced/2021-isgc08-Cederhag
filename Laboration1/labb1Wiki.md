@@ -43,7 +43,7 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ### open file (Analys)
 
-![openFile](./UML/openFile.drawio.png)
+![openfile](./UML/openFile.drawio.png)
 
 ### save as File (Analys)'
 
@@ -51,11 +51,11 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ### save file(Original alt) (Analys)
 
-![newFile](./UML/saveFile(original alt).drawio.png)
+![saveFile(originalalt)](./UML/saveFile(originalalt).drawio.png)
 
 ### save file (Alt 1)
 
-![saveFile alt 1](./UML/saveFile(alt 1).drawio.png)
+![saveFile(Alt1)](./UML/saveFile(Alt1).drawio.png)
 
 ## Resultat från Design
 
