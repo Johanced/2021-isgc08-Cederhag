@@ -53,7 +53,7 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ### save file sekvens(Alt 1)
 
-![saveFile(Alt1).drawio](./UML/saveFile(Alt1).drawio.png)
+![saveFile(alt1).drawio](./UML/saveFile(Alt1).drawio.png)
 
 ## Resultat från Design
 
