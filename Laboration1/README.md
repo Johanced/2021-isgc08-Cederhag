@@ -43,7 +43,7 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ![openfile.drawio](./UML/openfile.drawio.png)
 
-### save as File (Analys)'
+### save as File (Analys)
 
 ![saveAsFile.drawio](./UML/saveAsFile.drawio.png)
 
