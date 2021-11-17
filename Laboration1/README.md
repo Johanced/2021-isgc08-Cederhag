@@ -59,3 +59,5 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ### Klassdiagram (design)
 
+![classDiagram.drawio](./UML/classDiagram.drawio.png)
+
