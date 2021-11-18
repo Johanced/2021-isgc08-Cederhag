@@ -1,46 +1,30 @@
-import javax.swing.event.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.*;
-import javax.swing.*;
-import java.io.*;
-import java.awt.event.*;
+import java.io.File;
 
-public class Controller implements ActionListener {
+public class Controller {
 	private View view;
 	private Model model;
 	
 	public Controller() {
 		this.view = new View(this);
-		this.model = new Model();
-		
-		view.initGUI();
-		
-		
+		this.model = new Model();	
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		String command = e.getActionCommand();
-		System.out.println("Controller: command: "+command);
-		switch(command) {
-		case "new":
+	public void actionPerformed(String btnClicked) {
+		System.out.println("controller : "+btnClicked);
+		customFile file = new customFile();
+		switch(btnClicked) {
+			case "save": file = view.saveFileDialog();
+				System.out.println("save: controller: filepath= "+file.getFilePath());
+				model.saveFile(file);
 			break;
-		case "open":
-			break;
-		case "save":
-			break;
-		case "saveAs":
-			break;
-		case "exit":
+			case "open": file = view.openFileDialog();
+				System.out.println("open: controller: filepath= "+file.getFilePath());
+				view.updateTextArea(model.openFile(file));
 			break;
 		}
-		
-		
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		new Controller();
 
 	}

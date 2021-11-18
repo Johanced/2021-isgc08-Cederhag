@@ -1,4 +1,4 @@
-## **Laboration 1**
+# **Laboration 1**
 
 **Av: Johan Cederhag**
 
@@ -19,7 +19,7 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 * Redigera text, denna innehåller mindre operationer såsom:
   * Kopiera text, Klipp ut text, Klistra in text
 
-## Design krav
+# Design krav
 
 * Utvecklas i Java (eclipse)
 * Swing java bibliotek för GUI
@@ -31,55 +31,90 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 **ATT GÖRA**
 
-* "edit text" - use case
+**View**
 
-  * Addera en sekvens diagram med en note där cut,copy,paste finns med - Sekvens diagrammet ska heta EDIT TEXT
+* getFileContent() : file
+* notifyDataChanged(file)
+* updateTextArea(file)
+* openFileDialog()
+* saveFileDialog()
+* initGUI()
 
-* Användaren ska bara interagera med VIEW
+**Controller**
 
-  * openFileDialog() - anropas från controller i view
-  * saveFileDialog() - anropas från controller i view
-  * Dessa **funktioner** ska finnas i **VIEW**
-  * Controller tar sedan emot returen och skickar till model - "Öppna denna fil"
-  * user input -> View [användaren vill öppna fil] -> controller [View.VisaÖppnaFilDialog] -> View [användaren valde denna fil] -> Controller [Läs in denna fil] -> Model ... Retur fil osv, **slutligen** View visa denna fil på skärmen.. SLUT
+* ActionPerformed()
 
-  **KLART**
+**Model**
 
-  * Save as diagram
-  * open file diagram
+* createNewFile() : file
+
+* openFile() : file
+
+* saveFile(file) : void
+
+  
+
+**KLART**
+
+* Save as diagram
+* open file diagram
 
 
 
-## Resultat från Analys
+# Resultat från Analys
 
-### Use case diagram
+### Use case diagram (Analys)
 
-![usecase1](./UML/usecase1.png)
+![usecase1](./UML/design/usecase1.png)
+
+## Sekvensdiagram (Analys)
 
 ### new file sekvens (Analys)
 
-![newFile.drawio](./UML/newFile.drawio.png)
+![usecase1](./UML/analys/newFileAnalys.drawio.png)
 
-### open file sekvens(Analys)
+### save file sekvens (Analys)
 
-![openfile.drawio](./UML/openfile.drawio.png)
+![usecase1](./UML/analys/saveFileAnalys.drawio.png)
 
-### save as File sekvens (Analys)
+### save as file sekvens (Analys)
 
-![saveAsFile.drawio](./UML/saveAsFile.drawio.png)
+![usecase1](./UML/analys/saveAsFileAnalys.drawio.png)
 
-### save file sekvens (Original alt) (Analys)
+### open file sekvens (Analys)
 
-![saveFile(originalalt).drawio](./UML/saveFile(originalalt).drawio.png)
+![usecase1](./UML/analys/openFileAnalys.drawio.png)
 
-### save file sekvens(Alt 1)
+### edit text sekvens (Analys)
 
-![saveFile(alt1).drawio](./UML/saveFile(Alt1).drawio.png)
+![usecase1](./UML/analys/editTextAnalys.drawio.png)
 
-## Resultat från Design
 
-### Klassdiagram (design)
+# Resultat från Design
 
-![classDiagram.drawio](./UML/classDiagram.drawio.png)
+## Sekvensdiagram (Design)
+### new file sekvens (Design)
+
+![newFile.drawio](./UML/design/newFile.drawio.png)
+
+### open file sekvens(Design)
+
+![openfile.drawio](./UML/design/openfile.drawio.png)
+
+### save as File sekvens (Design)
+
+![saveAsFile.drawio](./UML/design/saveAsFile.drawio.png)
+
+### save file sekvens (Original alt) (Design)
+
+![saveFile(originalalt).drawio](./UML/design/saveFile(originalalt).drawio.png)
+
+### save file sekvens(Alt 1) (Design)
+
+![saveFile(alt1).drawio](./UML/design/saveFile(Alt1).drawio.png)
+
+## Klassdiagram (design)
+
+![classDiagram.drawio](./UML/design/classDiagram.drawio.png)
 
 5

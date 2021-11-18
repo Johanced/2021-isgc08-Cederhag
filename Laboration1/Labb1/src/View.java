@@ -1,26 +1,29 @@
 
-import javax.swing.*;
-import javax.swing.event.DocumentListener;
-
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.io.File;
 
-public class View {
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JTextArea;
+import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+public class View implements ActionListener {
 
 	private JFrame mainFrame;
 	private JTextArea textArea;
-	private ArrayList<JComponent> ActionComponents = new ArrayList();
 	private Controller controller;
 
 	public View(Controller c) {
 		this.controller = c;
+		
+		initGUI();
 	}
 	
-	public void initActionListener(ActionListener acListener) {
-		for (JComponent comp : ActionComponents) {
-			((AbstractButton) comp).addActionListener(acListener);
-		}
-	}
 	public void initTextAreaListener(DocumentListener dcListener) {
 		textArea.getDocument().addDocumentListener(dcListener);
 	}
@@ -37,6 +40,12 @@ public class View {
 		JMenuItem menuItem4 = new JMenuItem("Save as");
 		JMenuItem menuItem9 = new JMenuItem("Quit");
 		
+		menuItem1.addActionListener(this);
+		menuItem2.addActionListener(this);
+		menuItem3.addActionListener(this);
+		menuItem4.addActionListener(this);
+		menuItem9.addActionListener(this);
+		
 		menuItem1.setActionCommand("new");
 		menuItem2.setActionCommand("open");
 		menuItem3.setActionCommand("save");
@@ -51,18 +60,56 @@ public class View {
 		
 		menuBar.add(menu1);
 		
-		ActionComponents.add(menuItem1);
-		ActionComponents.add(menuItem2);
-		ActionComponents.add(menuItem3);
-		ActionComponents.add(menuItem4);
-		ActionComponents.add(menuItem9);
-		ActionComponents.add(textArea);
-		
-		
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.add(textArea);
 		mainFrame.setSize(500,650);
 		mainFrame.setDefaultCloseOperation(mainFrame.EXIT_ON_CLOSE);
 		mainFrame.show();
 	}
+	public customFile openFileDialog() {
+		JFileChooser fileChooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("txt files", "txt");
+		fileChooser.setFileFilter(filter);
+		File file = null;
+		int result = fileChooser.showOpenDialog(mainFrame);
+		if (result == JFileChooser.APPROVE_OPTION) {
+		    file = fileChooser.getSelectedFile();
+		    customFile customfile = new customFile();
+		    customfile.setFilePath(file.getAbsolutePath());
+		    System.out.println("view: openFileDialog: Selected file: " + file.getAbsolutePath());
+		    return customfile;
+		}
+		
+		return null;
+	}
+	public customFile saveFileDialog() {
+		JFileChooser fileChooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("txt files", "txt");
+		fileChooser.setFileFilter(filter);
+		int result = fileChooser.showSaveDialog(mainFrame);
+		File fileToSave = null;
+		if (result == JFileChooser.APPROVE_OPTION) {
+		    fileToSave = fileChooser.getSelectedFile();
+		    customFile customfile = new customFile();
+		    customfile.setFilePath(fileToSave.getAbsolutePath());
+		    customfile.setFileContent(textArea.getText());
+		    System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+		    return customfile;
+		}
+		
+		return null;	
+	}
+	public void updateTextArea(customFile file) {
+		
+		textArea.setText(file.getFileContent());
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String btnClicked = e.getActionCommand();
+		System.out.println("view : "+btnClicked);
+		controller.actionPerformed(btnClicked);
+		
+	}
+
 }
