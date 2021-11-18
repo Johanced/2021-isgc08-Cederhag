@@ -8,14 +8,14 @@ Min design ska beskriva och konceptualisera en enkel textredigerare, likt 'notep
 
 **Exempel på layout:**
 
-![uiExample](./UML/uiExample.PNG)
+![uiExample](./UML/design/uiExample.PNG)
 
 Filhantering ska göra det möjligt att lagra data så att den kvarstår. Användaren ska kunna göra följande operationer:
 
-* Öppna en ny tom fil
+* Skapa ny fil
 * Öppna befintlig fil
-* Spara den nuvarande öppna filen (har dokumentet en redan befintlig fil kommer användaren bara behöva trycka på 'save', har dokumentet inte det kommer användaren behöva välja vart filen ska sparas)
-* Spara den nuvarande fil genom att välja vart den ska sparas (spar-dialog öppnas)
+* Spara den nuvarande öppna filen 
+* Spara den nuvarande fil genom att välja vart den ska sparas
 * Redigera text, denna innehåller mindre operationer såsom:
   * Kopiera text, Klipp ut text, Klistra in text
 
@@ -34,7 +34,7 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 **View**
 
 * getFileContent() : file
-* notifyDataChanged(file)
+* notifyDataChanged(file) /// TVEK PÅ ANVÄNDING
 * updateTextArea(file)
 * openFileDialog()
 * saveFileDialog()
