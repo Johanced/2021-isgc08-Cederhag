@@ -29,6 +29,27 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 
 
+**ATT GÖRA**
+
+* "edit text" - use case
+
+  * Addera en sekvens diagram med en note där cut,copy,paste finns med - Sekvens diagrammet ska heta EDIT TEXT
+
+* Användaren ska bara interagera med VIEW
+
+  * openFileDialog() - anropas från controller i view
+  * saveFileDialog() - anropas från controller i view
+  * Dessa **funktioner** ska finnas i **VIEW**
+  * Controller tar sedan emot returen och skickar till model - "Öppna denna fil"
+  * user input -> View [användaren vill öppna fil] -> controller [View.VisaÖppnaFilDialog] -> View [användaren valde denna fil] -> Controller [Läs in denna fil] -> Model ... Retur fil osv, **slutligen** View visa denna fil på skärmen.. SLUT
+
+  **KLART**
+
+  * Save as diagram
+  * open file diagram
+
+
+
 ## Resultat från Analys
 
 ### Use case diagram
@@ -61,3 +82,4 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ![classDiagram.drawio](./UML/classDiagram.drawio.png)
 
+5
