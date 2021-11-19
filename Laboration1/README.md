@@ -18,14 +18,17 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 * Spara den nuvarande fil genom att välja vart den ska sparas
 * Redigera text, denna innehåller mindre operationer såsom:
   * Kopiera text, Klipp ut text, Klistra in text
+* Operationerna ovan ska vara tillgängliga i menyn, via knappen "File"
+
+![uiExample2](./UML/analys/uiExample2.PNG)
 
 # Design krav
 
-* Utvecklas i Java (eclipse)
+* Utvecklas i språket Java (eclipse utvecklingsmiljö)
 * Swing java bibliotek för GUI
 * Arkitekturen ska följa designmönstret MVC
-* Filhantering
 * Minimal kommunikation mellan MVC klasserna
+* Filhantering
 
 # Resultat från Analys
 
@@ -83,7 +86,7 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ![saveFile(alt0).drawio](./UML/design/saveFile(alt0).drawio.png)
 
-### save file sekvens(alt 1) (Design)
+### save file sekvens (alt 1) (Design)
 
 ![saveFile(alt1).drawio](./UML/design/saveFile(alt1).drawio.png)
 
