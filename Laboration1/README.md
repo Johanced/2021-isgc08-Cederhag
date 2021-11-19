@@ -8,7 +8,7 @@ Min design ska beskriva och konceptualisera en enkel textredigerare, likt 'notep
 
 **Exempel på layout:**
 
-![uiExample](./UML/design/uiExample.PNG)
+![uiExample](./UML/analys/uiExample.PNG)
 
 Filhantering ska göra det möjligt att lagra data så att den kvarstår. Användaren ska kunna göra följande operationer:
 
@@ -27,45 +27,11 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 * Filhantering
 * Minimal kommunikation mellan MVC klasserna
 
-
-
-**ATT GÖRA**
-
-**View**
-
-* getFileContent() : file
-* notifyDataChanged(file) /// TVEK PÅ ANVÄNDING
-* updateTextArea(file)
-* openFileDialog()
-* saveFileDialog()
-* initGUI()
-
-**Controller**
-
-* ActionPerformed()
-
-**Model**
-
-* createNewFile() : file
-
-* openFile() : file
-
-* saveFile(file) : void
-
-  
-
-**KLART**
-
-* Save as diagram
-* open file diagram
-
-
-
 # Resultat från Analys
 
 ### Use case diagram (Analys)
 
-![usecase1](./UML/design/usecase1.png)
+![usecase1](./UML/analys/usecase1.png)
 
 ## Sekvensdiagram (Analys)
 
@@ -89,15 +55,23 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ![usecase1](./UML/analys/editTextAnalys.drawio.png)
 
+## Klassdiagram (Analys)
+
+![application(analys).drawio](./UML/analys/application(analys).drawio.png)
+
 
 # Resultat från Design
 
 ## Sekvensdiagram (Design)
-### new file sekvens (Design)
+### new file sekvens (alt 0) (Design)
 
-![newFile.drawio](./UML/design/newFile.drawio.png)
+![newFile(alt0).drawio](./UML/design/newFile(alt0).drawio.png)
 
-### open file sekvens(Design)
+### new file sekvens (alt 1) (Design)
+
+![newFile(alt1).drawio](./UML/design/newFile(alt1).drawio.png)
+
+### open file sekvens (Design)
 
 ![openfile.drawio](./UML/design/openfile.drawio.png)
 
@@ -105,16 +79,21 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ![saveAsFile.drawio](./UML/design/saveAsFile.drawio.png)
 
-### save file sekvens (Original alt) (Design)
+### save file sekvens (alt 0) (Design)
 
-![saveFile(originalalt).drawio](./UML/design/saveFile(originalalt).drawio.png)
+![saveFile(alt0).drawio](./UML/design/saveFile(alt0).drawio.png)
 
-### save file sekvens(Alt 1) (Design)
+### save file sekvens(alt 1) (Design)
 
-![saveFile(alt1).drawio](./UML/design/saveFile(Alt1).drawio.png)
+![saveFile(alt1).drawio](./UML/design/saveFile(alt1).drawio.png)
 
 ## Klassdiagram (design)
 
+### Application  Analys + Design 
+
+![application(analysdesign)drawio](./UML/design/application(analysdesign)drawio.png)
+
+### Application diagram Design MVC
+
 ![classDiagram.drawio](./UML/design/classDiagram.drawio.png)
 
-5
