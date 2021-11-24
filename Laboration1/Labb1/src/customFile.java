@@ -2,6 +2,8 @@
 public class customFile {
 	private String filePath;
 	private String fileContent;
+	private String fileName;
+	private boolean hasChanged = false;
 	
 	public String getFilePath() {
 		return filePath;
@@ -19,6 +21,18 @@ public class customFile {
 	}
 	public void setFileContent(String fileContent) {
 		this.fileContent = fileContent;
+	}
+	public boolean hasChanged() {
+		return hasChanged;
+	}
+	public void setHasChanged(boolean hasChanged) {
+		this.hasChanged = hasChanged;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 }

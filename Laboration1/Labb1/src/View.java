@@ -8,11 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class View implements ActionListener {
+public class View implements ActionListener, DocumentListener {
 
 	private JFrame mainFrame;
 	private JTextArea textArea;
@@ -24,9 +26,6 @@ public class View implements ActionListener {
 		initGUI();
 	}
 	
-	public void initTextAreaListener(DocumentListener dcListener) {
-		textArea.getDocument().addDocumentListener(dcListener);
-	}
 	
 	public void initGUI() {
 		mainFrame = new JFrame("Notepad - Filnamn");
@@ -59,11 +58,13 @@ public class View implements ActionListener {
 		menu1.add(menuItem9);
 		
 		menuBar.add(menu1);
+		textArea.getDocument().addDocumentListener(this);
 		
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.add(textArea);
 		mainFrame.setSize(500,650);
 		mainFrame.setDefaultCloseOperation(mainFrame.EXIT_ON_CLOSE);
+		mainFrame.setLocationRelativeTo(null);
 		mainFrame.show();
 	}
 	public customFile openFileDialog() {
@@ -76,10 +77,12 @@ public class View implements ActionListener {
 		    file = fileChooser.getSelectedFile();
 		    customFile customfile = new customFile();
 		    customfile.setFilePath(file.getAbsolutePath());
+		    customfile.setFileName(file.getName());
+		    mainFrame.setTitle(customfile.getFileName());
+		    System.out.println("view: fileName = "+file.getName());
 		    System.out.println("view: openFileDialog: Selected file: " + file.getAbsolutePath());
 		    return customfile;
 		}
-		
 		return null;
 	}
 	public customFile saveFileDialog() {
@@ -93,22 +96,65 @@ public class View implements ActionListener {
 		    customFile customfile = new customFile();
 		    customfile.setFilePath(fileToSave.getAbsolutePath());
 		    customfile.setFileContent(textArea.getText());
-		    System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+		    customfile.setFileName(fileToSave.getName());
+		    mainFrame.setTitle(customfile.getFileName()+ ".txt");
+		    System.out.println("view: Save as file: " + fileToSave.getAbsolutePath());
 		    return customfile;
+		}else {
+			return null;
 		}
-		
-		return null;	
+				
 	}
+	
+	public int promptSaveChecker() {
+		Object[] options = {"Save", "Don't save", "Cancel"};
+			int n = JOptionPane.showOptionDialog(mainFrame, "Do you want to save changes?","Ändringar ej sparade",
+							JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.WARNING_MESSAGE,
+							null,
+							options,
+							options[2]);
+			System.out.println("PromptSaveChecker n: "+n);
+		return n;	
+	}
+	
 	public void updateTextArea(customFile file) {
-		
+		if(file.getFileName() == mainFrame.getTitle()) {
+			mainFrame.setTitle("Untitled");
+		}
 		textArea.setText(file.getFileContent());
+	}
+	public String getTextContent() {
+		return textArea.getText();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String btnClicked = e.getActionCommand();
 		System.out.println("view : "+btnClicked);
-		controller.actionPerformed(btnClicked);
+		controller.handleEvent(btnClicked);
+		
+	}
+
+
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		controller.handleEvent("docChanged");
+		//System.out.println("view: insertUpdate: Triggered");
+		
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		controller.handleEvent("docChanged");
+		//System.out.println("view: removeUpdate: Triggered");
+		
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		controller.handleEvent("docChanged");
+		//System.out.println("view: changedUpdate: Triggered");
 		
 	}
 

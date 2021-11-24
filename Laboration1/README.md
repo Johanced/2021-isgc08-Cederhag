@@ -98,5 +98,11 @@ Filhantering ska göra det möjligt att lagra data så att den kvarstår. Använ
 
 ### Application diagram Design MVC
 
+#### **Version 1:**
+
 ![classDiagram.drawio](./UML/design/classDiagram.drawio.png)
+
+#### **Version 2:**
+
+![classDiagram.drawio](./UML/design/classDiagram(Updated).drawio.png)
 
