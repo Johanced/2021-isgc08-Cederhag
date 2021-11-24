@@ -21,8 +21,7 @@ public class View implements ActionListener, DocumentListener {
 	private Controller controller;
 
 	public View(Controller c) {
-		this.controller = c;
-		
+		this.controller = c;	
 		initGUI();
 	}
 	
