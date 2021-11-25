@@ -10,19 +10,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class View implements ActionListener, DocumentListener {
+public class GUIview extends view implements ActionListener, DocumentListener {
 
 	private JFrame mainFrame;
 	private JTextArea textArea;
 	private Controller controller;
 
-	public View(Controller c) {
+	public GUIview(Controller c) {
 		this.controller = c;	
-		initGUI();
+		System.out.println("GUI VIEW CONSTRUCT");
+		//initGUI();
 	}
 	
 	
@@ -62,7 +64,7 @@ public class View implements ActionListener, DocumentListener {
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.add(textArea);
 		mainFrame.setSize(500,650);
-		mainFrame.setDefaultCloseOperation(mainFrame.EXIT_ON_CLOSE);
+		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.show();
 	}

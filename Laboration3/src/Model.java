@@ -44,7 +44,7 @@ public class Model {
 			//currfile.setFileContent(slask);
 			//currfile.setFilePath(file.getFilePath());
 			return cFile;
-		}catch(Exception e) {
+		}catch(java.io.IOException e) {
 			System.out.println("Model: openfile: Error.");
 			return null;
 		}

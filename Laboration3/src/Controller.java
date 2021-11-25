@@ -1,10 +1,14 @@
+import java.util.Scanner;
+
 public class Controller {
 	private view view;
 	private Model model;
 	
-	public Controller() {
-		this.view = new view(this);
+	public Controller(int choice) {
 		this.model = new Model();
+		ViewFactory VF = new ViewFactory();
+		view = VF.createView(choice, this);		
+		view.initGUI();
 	}
 
 	public void handleEvent(String btnClicked) {
@@ -140,7 +144,31 @@ public class Controller {
 	}
 	
 	public static void main(String[] args) {
-		new Controller();
+		int choice = 0;
+		while(choice != 9) {
+			
+			System.out.println("---Select View---");
+			System.out.println("1: GUI");
+			System.out.println("2: CLI");
+			System.out.println("9: Quit");
+			
+			Scanner sc = new Scanner(System.in);
+			try {
+				choice = sc.nextInt();
+				System.out.println("view: Choice = "+choice);
+				if(choice == 1 || choice == 2) {
+					System.out.println("STARTING...");
+					new Controller(choice);
+					break;
+				}
+			}catch(java.util.InputMismatchException e) {
+				System.out.println("Try again!..");
+				System.out.println("ex: "+e);
+			}
+
+			
+
+		}		
 
 	}
 
