@@ -37,12 +37,12 @@ public class Model {
 			FileReader reader = new FileReader(file.getFilePath(), StandardCharsets.UTF_8);
 			reader.read(buffer);
 			String slask = new String(buffer);
+			slask = slask.trim();
 			cFile.setFileContent(slask);
 			cFile.setFileName(file.getFileName());
 			reader.close();
 			System.out.println("Model: openfile: read from file. ");
-			//currfile.setFileContent(slask);
-			//currfile.setFilePath(file.getFilePath());
+			
 			return cFile;
 		}catch(Exception e) {
 			System.out.println("Model: openfile: Error.");

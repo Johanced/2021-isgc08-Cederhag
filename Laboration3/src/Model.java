@@ -41,8 +41,7 @@ public class Model {
 			cFile.setFileName(file.getFileName());
 			reader.close();
 			System.out.println("Model: openfile: read from file. ");
-			//currfile.setFileContent(slask);
-			//currfile.setFilePath(file.getFilePath());
+
 			return cFile;
 		}catch(java.io.IOException e) {
 			System.out.println("Model: openfile: Error.");

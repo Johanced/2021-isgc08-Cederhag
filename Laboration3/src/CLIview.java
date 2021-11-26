@@ -4,7 +4,7 @@ import javax.swing.event.DocumentEvent;
 
 public class CLIview extends view {
 	private Controller controller;
-	private String consoleContent;
+	private String consoleContent="";
 	Scanner sc = new Scanner(System.in);
 	
 	public CLIview(Controller c) {
@@ -23,7 +23,7 @@ public class CLIview extends view {
 			System.out.println("2: Open file");
 			System.out.println("3: Save file");
 			//TODO Ska jag lägga till "Edit file" som ett val?
-			System.out.println("4: Edit file"); //Kanske implementera? möjligtivs behöver jag icke! Fråga på handledning?
+			System.out.println("4: Edit file (Not implemented)"); //Kanske implementera? möjligtivs behöver jag icke! Fråga på handledning?
 			System.out.println("9: Quit");
             System.out.print("Please enter a number:");
             try {
@@ -50,8 +50,6 @@ public class CLIview extends view {
 			customFile customfile = new customFile();
 			customfile.setFilePath(choice);
 			customfile.setFileName(choice);
-			//customfile.setFileName(file.getName());
-			//System.out.println("view: fileName = "+file.getName());
 			System.out.println("CLIview load filepath: "+choice);
 			
 			return customfile;	
@@ -71,12 +69,8 @@ public class CLIview extends view {
 			System.out.println("CLIview: Save Choice = "+choice);
 			
 			customFile customfile = new customFile();
-			//TODO Lösa file content -> private consoleContent.
 			customfile.setFilePath(choice);
-			// ** ADD CONTENT TO FILE!! HÄÄÄÄÄRRR
-			customfile.setFileContent(choice);
-			//customfile.setFileName(file.getName());
-			//System.out.println("view: fileName = "+file.getName());
+			customfile.setFileContent(consoleContent);
 			System.out.println("CLIview filepath: "+choice);
 			
 			return customfile;	
@@ -85,6 +79,7 @@ public class CLIview extends view {
 		return null;	
 	}
 	public int promptSaveChecker() {
+		// --Users Choices--
 		//0 = save
 		//1 = don't save
 		//2 = cancel
@@ -109,11 +104,18 @@ public class CLIview extends view {
 	}
 	public void updateTextArea(customFile file) {
 		if(file != null) {
-			System.out.println(file.getFileName()+":: "+file.getFileContent());
-		}else {
-			System.out.println("updateTextArea: incoming File is null");
+			if(file.getFileName() == null) {
+				file.setFileName("Untitled.txt");
+			}
+			if(file.getFileContent() == null) {
+				file.setFileContent("");
+			}
+		}
+		else {
 			System.out.println("File doesn't exist!");
 		}
+		
+		System.out.println(file.getFileName()+" : "+file.getFileContent());
 		
 			
 	}
