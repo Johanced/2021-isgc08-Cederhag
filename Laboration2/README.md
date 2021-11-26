@@ -66,11 +66,11 @@
 
 ### Application diagram Design MVC
 
-#### **Version 1:**
+#### **Version 1 (From labb 1):**
 
 ![classDiagram.drawio](./UML/design/classDiagram.drawio.png)
 
-#### **Version 2:**
+#### **Version 2 (Updated in line with the result from labb2):**
 
 ![classDiagram.drawio](./UML/design/classDiagram(Updated).drawio.png)
 
