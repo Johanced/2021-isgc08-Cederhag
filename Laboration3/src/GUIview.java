@@ -10,7 +10,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -22,14 +21,13 @@ public class GUIview extends view implements ActionListener, DocumentListener {
 	private Controller controller;
 
 	public GUIview(Controller c) {
-		this.controller = c;	
-		System.out.println("GUI VIEW CONSTRUCT");
+		this.controller = c;
 		//initGUI();
 	}
 	
 	
 	public void initGUI() {
-		mainFrame = new JFrame("Notepad - Filnamn");
+		mainFrame = new JFrame("Notepad - Untitled.txt");
 		textArea = new JTextArea(); 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu1 = new JMenu("File");
@@ -64,7 +62,7 @@ public class GUIview extends view implements ActionListener, DocumentListener {
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.add(textArea);
 		mainFrame.setSize(500,650);
-		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		mainFrame.setDefaultCloseOperation(mainFrame.EXIT_ON_CLOSE);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.show();
 	}
@@ -79,9 +77,8 @@ public class GUIview extends view implements ActionListener, DocumentListener {
 		    customFile customfile = new customFile();
 		    customfile.setFilePath(file.getAbsolutePath());
 		    customfile.setFileName(file.getName());
-		    mainFrame.setTitle(customfile.getFileName());
-		    System.out.println("view: fileName = "+file.getName());
-		    System.out.println("view: openFileDialog: Selected file: " + file.getAbsolutePath());
+		    System.out.println("View: fileName = "+file.getName());
+		    System.out.println("View: openFileDialog: Selected file: " + file.getAbsolutePath());
 		    return customfile;
 		}
 		return null;
@@ -98,8 +95,7 @@ public class GUIview extends view implements ActionListener, DocumentListener {
 		    customfile.setFilePath(fileToSave.getAbsolutePath());
 		    customfile.setFileContent(textArea.getText());
 		    customfile.setFileName(fileToSave.getName());
-		    mainFrame.setTitle(customfile.getFileName()+ ".txt");
-		    System.out.println("view: Save as file: " + fileToSave.getAbsolutePath());
+		    System.out.println("View: Save as file: " + fileToSave.getAbsolutePath());
 		    return customfile;
 		}else {
 			return null;
@@ -115,14 +111,18 @@ public class GUIview extends view implements ActionListener, DocumentListener {
 							null,
 							options,
 							options[2]);
-			System.out.println("PromptSaveChecker n: "+n);
+			System.out.println("View: PromptSaveChecker n: "+n);
 		return n;	
 	}
 	
 	public void updateTextArea(customFile file) {
-		if(file.getFileName() == mainFrame.getTitle()) {
-			mainFrame.setTitle("Untitled");
+		System.out.println("View: updateTextArea: file has name: "+file.getFileName());
+		
+		if(file.getFileName() == null) {
+			System.out.println("View: file name is NULL!");
+			file.setFileName("Untitled.txt");
 		}
+	    mainFrame.setTitle("Notepad - "+file.getFileName());
 		textArea.setText(file.getFileContent());
 	}
 	public String getTextContent() {

@@ -22,13 +22,17 @@ public class CLIview extends view {
 			System.out.println("1: New file");
 			System.out.println("2: Open file");
 			System.out.println("3: Save file");
-			//TODO Ska jag lägga till "Edit file" som ett val?
-			System.out.println("4: Edit file (Not implemented)"); //Kanske implementera? möjligtivs behöver jag icke! Fråga på handledning?
+			System.out.println("4: Print currentfile content");
 			System.out.println("9: Quit");
             System.out.print("Please enter a number:");
             try {
-            	  choice = sc.nextLine();
-                  actionPerformed(choice);
+            	if(sc.hasNextLine()) {
+            		 choice = sc.nextLine();
+            		 System.out.println("initGUI: Triggered: choice = "+choice);
+                     actionPerformed(choice);
+                    
+            	}
+            	 
 			}catch(java.util.InputMismatchException e) {
 				System.out.println("CLIview ex: "+e);
 			}
@@ -38,118 +42,163 @@ public class CLIview extends view {
 
 	}
 	public customFile openFileDialog() {
-		String choice= "";
-		while(choice != "9") {
+		int choice = 0;
+		while(choice != 9) {
 			
 			System.out.println("---Open file---");
-			System.out.println("Type path to file:");
-			System.out.println("9: <-Back");
+			System.out.println("1. Type path to file");
+			System.out.println("9. <-Back");
+			System.out.println("Enter choice: ");
 			
-			choice = sc.nextLine();
-			
-			customFile customfile = new customFile();
-			customfile.setFilePath(choice);
-			customfile.setFileName(choice);
-			System.out.println("CLIview load filepath: "+choice);
-			
-			return customfile;	
+			if(sc.hasNext()) {
+				choice = sc.nextInt();
+				sc.nextLine();
+				if(choice == 1) {
+					System.out.println("---Open file---");
+					System.out.println("Enter filepath:");
+					String path = sc.nextLine();
+					customFile customfile = new customFile();
+					customfile.setFilePath(path);
+					customfile.setFileName(path);
+					System.out.println("view: openfileDialog path: "+path);	
+					return customfile;	
+					
+				}
+				else if(choice == 9) {
+					System.out.println("view: returning to menu..");
+					return null;
+				}
+				
+			}
 		}
+		return null;
 		
-		return null;	
 	}
 	public customFile saveFileDialog() {
-		String choice= "";
-		while(choice != "9") {
-			
-			System.out.println("---Save file---");
-			System.out.println("Type path to file:");
-			System.out.println("9: <-Back");
-			
-			choice = sc.nextLine();
-			System.out.println("CLIview: Save Choice = "+choice);
-			
-			customFile customfile = new customFile();
-			customfile.setFilePath(choice);
-			customfile.setFileContent(consoleContent);
-			System.out.println("CLIview filepath: "+choice);
-			
-			return customfile;	
+			int choice = 0;
+			while(choice != 9) {
+					
+				System.out.println("---Save file---");
+				System.out.println("1. Type path to file");
+				System.out.println("9. <-Back");
+				System.out.println("Enter choice: ");
+
+					choice = sc.nextInt();
+					sc.nextLine();
+						
+					if(choice == 1) {
+						System.out.println("---Save file---");
+						System.out.println("Enter filepath:");
+						String path = sc.nextLine();
+						customFile customfile = new customFile();
+						customfile.setFilePath(path);
+						customfile.setFileContent(consoleContent);
+						customfile.setFileName(path);
+						System.out.println("CLIview savefiledialog :filepath: "+choice);
+									
+						return customfile;	
+						
+					}
+					else if(choice == 9) {
+						System.out.println("view: savefiledialog: returning to menu..");
+						return null;
+					}else {
+						return null;
+					}	
+			}
+			return null;
 		}
+
+
+	public void newFileDialog() {
 		
-		return null;	
+		String userInput="";
+		
+			System.out.println("---New file---");
+			System.out.println("Enter file content:");
+            try {
+            	if(sc.hasNextLine()) {
+            		userInput = sc.nextLine();
+                	consoleContent = userInput;
+            	}	
+
+			}catch(java.util.InputMismatchException e) {
+				System.out.println("CLIview ex: "+e);
+			}
+          
 	}
 	public int promptSaveChecker() {
 		// --Users Choices--
 		//0 = save
 		//1 = don't save
 		//2 = cancel
-		
 		int choice=0;
-		do {
 			System.out.println("---Changes may go lost on ye!---");
 			System.out.println("1. save");
 			System.out.println("2. don't save");
 			System.out.println("3. cancel");
 			try {
 				choice = sc.nextInt();
+				sc.nextLine();
 				choice = choice -1;
 				System.out.println("prompt returning: "+choice);
 				return choice;
 			}catch(Exception e) {
 				System.out.println("ex: "+e);
 			}
-
-		}while(choice != 3);
-		return 2;	
+			return 2;	
 	}
 	public void updateTextArea(customFile file) {
 		if(file != null) {
 			if(file.getFileName() == null) {
+				System.out.println("View: file name is NULL!");
 				file.setFileName("Untitled.txt");
 			}
-			if(file.getFileContent() == null) {
-				file.setFileContent("");
-			}
+			consoleContent = file.getFileContent();
+			System.out.println(file.getFileName()+" : "+file.getFileContent());
+		}else {
+			System.out.println("View: File doesn't exist..");
 		}
-		else {
-			System.out.println("File doesn't exist!");
-		}
-		
-		System.out.println(file.getFileName()+" : "+file.getFileContent());
+
 		
 			
 	}
 	public String getTextContent() {
-		//TODO Temporär lösning -> consoleContent kommer vara tom
 		return consoleContent;
+	}
+	public void printConsoleContent() {
+		System.out.println(": "+consoleContent);
 	}
 	public void actionPerformed(String userChoice) {
 		System.out.println("CLIview: actionPerformed("+userChoice+");");
 		switch(userChoice) {
-			case "1": controller.handleEvent("new");
+			case "1": controller.handleEvent("new"); System.out.println("view: Actionperformed called ()"); newFileDialog(); controller.handleEvent("docChanged");
 			break;
 			case "2": controller.handleEvent("open");
 			break;
 			case "3": controller.handleEvent("save");
+			break;
+			case "4": printConsoleContent();
 			break;
 			case "9": controller.handleEvent("quit");
 			break;
 		}
 	}
 
+	// Not implemented
 	public void insertUpdate(DocumentEvent e) {
 		//controller.handleEvent("docChanged");
 		//System.out.println("view: insertUpdate: Triggered");
 		
 	}
 
-
+	// Not implemented
 	public void removeUpdate(DocumentEvent e) {
 		//controller.handleEvent("docChanged");
 		//System.out.println("view: removeUpdate: Triggered");
 		
 	}
-
+	// Not implemented
 	public void changedUpdate(DocumentEvent e) {
 		//controller.handleEvent("docChanged");
 		//System.out.println("view: changedUpdate: Triggered");
