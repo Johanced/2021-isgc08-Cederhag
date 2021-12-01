@@ -92,7 +92,7 @@ public class Controller {
 			break;
 			
 		case "docChanged":
-			System.out.println("controller: docChanged");
+			//System.out.println("controller: docChanged");
 			model.getCurrfile().setHasChanged(true);
 		break;
 		}
@@ -133,8 +133,10 @@ public class Controller {
 	}
 	// No errors 'new' Flow
 	public void newMainFlow() {
+		
 		view.updateTextArea(model.createNewFile());
 		model.getCurrfile().setHasChanged(false);
+		view.newFileDialog();
 	}
 	
 	public static void main(String[] args) {
@@ -149,9 +151,9 @@ public class Controller {
 			Scanner sc = new Scanner(System.in);
 			try {
 				choice = sc.nextInt();
-				System.out.println("view: Choice = "+choice);
+				sc.nextLine();
 				if(choice == 1 || choice == 2) {
-					System.out.println("STARTING...");
+					System.out.println("Starting...");
 					new Controller(choice);
 					break;
 				}

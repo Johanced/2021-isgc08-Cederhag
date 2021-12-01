@@ -9,7 +9,6 @@ public class CLIview extends view {
 	
 	public CLIview(Controller c) {
 		this.controller = c;
-		System.out.println("CLI VIEW CONSTRUCT");
 		//initGUI();
 	}
 	
@@ -22,13 +21,13 @@ public class CLIview extends view {
 			System.out.println("1: New file");
 			System.out.println("2: Open file");
 			System.out.println("3: Save file");
-			System.out.println("4: Print currentfile content");
+			System.out.println("4: Save as file");
+			System.out.println("5: Print currentfile content");
 			System.out.println("9: Quit");
-            System.out.print("Please enter a number:");
+            System.out.print("My menu choice:");
             try {
             	if(sc.hasNextLine()) {
             		 choice = sc.nextLine();
-            		 System.out.println("initGUI: Triggered: choice = "+choice);
                      actionPerformed(choice);
                     
             	}
@@ -60,7 +59,6 @@ public class CLIview extends view {
 					customFile customfile = new customFile();
 					customfile.setFilePath(path);
 					customfile.setFileName(path);
-					System.out.println("view: openfileDialog path: "+path);	
 					return customfile;	
 					
 				}
@@ -100,7 +98,7 @@ public class CLIview extends view {
 						
 					}
 					else if(choice == 9) {
-						System.out.println("view: savefiledialog: returning to menu..");
+						System.out.println("view: returning to menu..");
 						return null;
 					}else {
 						return null;
@@ -141,7 +139,7 @@ public class CLIview extends view {
 				choice = sc.nextInt();
 				sc.nextLine();
 				choice = choice -1;
-				System.out.println("prompt returning: "+choice);
+				//System.out.println("prompt returning: "+choice);
 				return choice;
 			}catch(Exception e) {
 				System.out.println("ex: "+e);
@@ -151,7 +149,7 @@ public class CLIview extends view {
 	public void updateTextArea(customFile file) {
 		if(file != null) {
 			if(file.getFileName() == null) {
-				System.out.println("View: file name is NULL!");
+				System.out.println("view: file name is null.. Changing name to 'Untitled.txt'");
 				file.setFileName("Untitled.txt");
 			}
 			consoleContent = file.getFileContent();
@@ -167,18 +165,25 @@ public class CLIview extends view {
 		return consoleContent;
 	}
 	public void printConsoleContent() {
-		System.out.println(": "+consoleContent);
+		if(consoleContent.isEmpty()) {
+			System.out.println("Filetext: File is empty!");
+		}else {
+			System.out.println("Filetext: "+consoleContent);	
+		}
+		
 	}
 	public void actionPerformed(String userChoice) {
-		System.out.println("CLIview: actionPerformed("+userChoice+");");
+		System.out.println("view: Menuchoice=("+userChoice+");");
 		switch(userChoice) {
-			case "1": controller.handleEvent("new"); System.out.println("view: Actionperformed called ()"); newFileDialog(); controller.handleEvent("docChanged");
+			case "1": controller.handleEvent("new");  controller.handleEvent("docChanged");
 			break;
 			case "2": controller.handleEvent("open");
 			break;
 			case "3": controller.handleEvent("save");
 			break;
-			case "4": printConsoleContent();
+			case "4": controller.handleEvent("saveas");
+			break;
+			case "5": printConsoleContent();
 			break;
 			case "9": controller.handleEvent("quit");
 			break;

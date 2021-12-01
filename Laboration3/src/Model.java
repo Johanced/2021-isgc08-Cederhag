@@ -55,13 +55,12 @@ public class Model {
 		
 		if(theCase == "checkChanged") {
 			if(currfile.hasChanged() == true) {
-				System.out.println("modelErrorChecker : hasChanged == true");
+				System.out.println("modelErrorChecker: File has changed.");
 				return 2;
 			}
 		}
 		if(theCase == "save") {
 			if(currfile.getFilePath() == null) {
-				System.out.println("RETURN CODE1 = 1");
 				return 1;
 			}else if(currfile.getFilePath().isEmpty()) {
 				return 1;

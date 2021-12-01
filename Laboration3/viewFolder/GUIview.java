@@ -14,19 +14,26 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class GUIview extends view implements ActionListener, DocumentListener {
+public class GUIview extends view implements GUI {
 
-	private JFrame mainFrame;
-	private JTextArea textArea;
+	//private JFrame mainFrame; // MAINFRAME ÄR NULL FIXXXAAAA
+	//private JTextArea textArea;
 	private Controller controller;
+	private GUI gui;
 
 	public GUIview(Controller c) {
 		this.controller = c;
+		GUIFactory GUIF = new GUIFactory();
+		gui = GUIF.createGUI(1,controller);		
+		//gui.initGUI();
 		//initGUI();
 	}
 	
 	
-	public void initGUI() {
+	//public void initGUI() {
+		
+		
+		/*
 		mainFrame = new JFrame("Notepad - Untitled.txt");
 		textArea = new JTextArea(); 
 		JMenuBar menuBar = new JMenuBar();
@@ -64,8 +71,9 @@ public class GUIview extends view implements ActionListener, DocumentListener {
 		mainFrame.setSize(500,650);
 		mainFrame.setDefaultCloseOperation(mainFrame.EXIT_ON_CLOSE);
 		mainFrame.setLocationRelativeTo(null);
-		mainFrame.show();
-	}
+		mainFrame.setVisible(true);
+		*/
+	//}
 	public customFile openFileDialog() {
 		JFileChooser fileChooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("txt files", "txt");
@@ -156,6 +164,22 @@ public class GUIview extends view implements ActionListener, DocumentListener {
 	public void changedUpdate(DocumentEvent e) {
 		controller.handleEvent("docChanged");
 		//System.out.println("view: changedUpdate: Triggered");
+		
+	}
+
+
+
+	@Override
+	public void newFileDialog() {
+		System.out.println("GUIview: newFileDialog() - Empty method");
+		
+	}
+
+
+	@Override
+	public void initGUI() {
+		System.out.println("GUI.initGUI();");
+		gui.initGUI();
 		
 	}
 
