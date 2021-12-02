@@ -1,17 +1,16 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.event.DocumentEvent;
 
 public class CLIview extends view {
-	private Controller controller;
+	//private Controller controller;
 	private String consoleContent="";
 	Scanner sc = new Scanner(System.in);
 	
 	public CLIview(Controller c) {
-		this.controller = c;
-		//initGUI();
+		super(c);
 	}
-	
 	
 	public void initGUI() {
 		String choice="";
@@ -40,7 +39,7 @@ public class CLIview extends view {
         } while (choice != "9");
 
 	}
-	public customFile openFileDialog() {
+	public ArrayList<String> openFileDialog() {
 		int choice = 0;
 		while(choice != 9) {
 			
@@ -56,11 +55,10 @@ public class CLIview extends view {
 					System.out.println("---Open file---");
 					System.out.println("Enter filepath:");
 					String path = sc.nextLine();
-					customFile customfile = new customFile();
-					customfile.setFilePath(path);
-					customfile.setFileName(path);
-					return customfile;	
-					
+					 ArrayList<String> fileHolder = new ArrayList<String>();
+					 fileHolder.add(path);
+					 fileHolder.add(path);
+					return fileHolder;	
 				}
 				else if(choice == 9) {
 					System.out.println("view: returning to menu..");
@@ -72,7 +70,7 @@ public class CLIview extends view {
 		return null;
 		
 	}
-	public customFile saveFileDialog() {
+	public ArrayList<String> saveFileDialog() {
 			int choice = 0;
 			while(choice != 9) {
 					
@@ -88,13 +86,13 @@ public class CLIview extends view {
 						System.out.println("---Save file---");
 						System.out.println("Enter filepath:");
 						String path = sc.nextLine();
-						customFile customfile = new customFile();
-						customfile.setFilePath(path);
-						customfile.setFileContent(consoleContent);
-						customfile.setFileName(path);
+						ArrayList<String> fileHolder = new ArrayList<String>();
+					    fileHolder.add(path);
+					    fileHolder.add(path);
+					    fileHolder.add(consoleContent);
 						System.out.println("CLIview savefiledialog :filepath: "+choice);
 									
-						return customfile;	
+						return fileHolder;	
 						
 					}
 					else if(choice == 9) {
@@ -156,11 +154,9 @@ public class CLIview extends view {
 			System.out.println(file.getFileName()+" : "+file.getFileContent());
 		}else {
 			System.out.println("View: File doesn't exist..");
-		}
-
-		
-			
+		}		
 	}
+	
 	public String getTextContent() {
 		return consoleContent;
 	}
@@ -190,24 +186,5 @@ public class CLIview extends view {
 		}
 	}
 
-	// Not implemented
-	public void insertUpdate(DocumentEvent e) {
-		//controller.handleEvent("docChanged");
-		//System.out.println("view: insertUpdate: Triggered");
-		
-	}
-
-	// Not implemented
-	public void removeUpdate(DocumentEvent e) {
-		//controller.handleEvent("docChanged");
-		//System.out.println("view: removeUpdate: Triggered");
-		
-	}
-	// Not implemented
-	public void changedUpdate(DocumentEvent e) {
-		//controller.handleEvent("docChanged");
-		//System.out.println("view: changedUpdate: Triggered");
-		
-	}
 
 }

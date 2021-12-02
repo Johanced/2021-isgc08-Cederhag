@@ -1,7 +1,7 @@
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -14,26 +14,18 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class GUIview extends view implements GUI {
+public class GUIview extends view implements ActionListener, DocumentListener {
 
-	//private JFrame mainFrame; // MAINFRAME ÄR NULL FIXXXAAAA
-	//private JTextArea textArea;
-	private Controller controller;
-	private GUI gui;
+	private JFrame mainFrame;
+	private JTextArea textArea;
+	//private Controller controller;
 
 	public GUIview(Controller c) {
-		this.controller = c;
-		GUIFactory GUIF = new GUIFactory();
-		gui = GUIF.createGUI(1,controller);		
-		//gui.initGUI();
-		//initGUI();
+		super(c);
+		
 	}
 	
-	
-	//public void initGUI() {
-		
-		
-		/*
+	public void initGUI() {
 		mainFrame = new JFrame("Notepad - Untitled.txt");
 		textArea = new JTextArea(); 
 		JMenuBar menuBar = new JMenuBar();
@@ -71,10 +63,12 @@ public class GUIview extends view implements GUI {
 		mainFrame.setSize(500,650);
 		mainFrame.setDefaultCloseOperation(mainFrame.EXIT_ON_CLOSE);
 		mainFrame.setLocationRelativeTo(null);
-		mainFrame.setVisible(true);
-		*/
-	//}
-	public customFile openFileDialog() {
+		mainFrame.show();
+	}
+	// RETURNING:
+	// String filepath
+	// STring filename
+	public ArrayList<String> openFileDialog() {
 		JFileChooser fileChooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("txt files", "txt");
 		fileChooser.setFileFilter(filter);
@@ -82,16 +76,20 @@ public class GUIview extends view implements GUI {
 		int result = fileChooser.showOpenDialog(mainFrame);
 		if (result == JFileChooser.APPROVE_OPTION) {
 		    file = fileChooser.getSelectedFile();
-		    customFile customfile = new customFile();
-		    customfile.setFilePath(file.getAbsolutePath());
-		    customfile.setFileName(file.getName());
+		    ArrayList<String> fileHolder = new ArrayList<String>();
+		    fileHolder.add(file.getAbsolutePath());
+		    fileHolder.add(file.getName());
 		    System.out.println("View: fileName = "+file.getName());
 		    System.out.println("View: openFileDialog: Selected file: " + file.getAbsolutePath());
-		    return customfile;
+		    return fileHolder;
 		}
 		return null;
 	}
-	public customFile saveFileDialog() {
+	// RETURNING:
+	// String filepath
+	// STring filename
+	// String filecontent
+	public ArrayList<String> saveFileDialog() {
 		JFileChooser fileChooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("txt files", "txt");
 		fileChooser.setFileFilter(filter);
@@ -99,12 +97,12 @@ public class GUIview extends view implements GUI {
 		File fileToSave = null;
 		if (result == JFileChooser.APPROVE_OPTION) {
 		    fileToSave = fileChooser.getSelectedFile();
-		    customFile customfile = new customFile();
-		    customfile.setFilePath(fileToSave.getAbsolutePath());
-		    customfile.setFileContent(textArea.getText());
-		    customfile.setFileName(fileToSave.getName());
+		    ArrayList<String> fileHolder = new ArrayList<String>();
+		    fileHolder.add(fileToSave.getAbsolutePath());
+		    fileHolder.add(fileToSave.getName());
+		    fileHolder.add(textArea.getText());
 		    System.out.println("View: Save as file: " + fileToSave.getAbsolutePath());
-		    return customfile;
+		    return fileHolder;
 		}else {
 			return null;
 		}
@@ -168,18 +166,10 @@ public class GUIview extends view implements GUI {
 	}
 
 
-
 	@Override
 	public void newFileDialog() {
-		System.out.println("GUIview: newFileDialog() - Empty method");
-		
-	}
-
-
-	@Override
-	public void initGUI() {
-		System.out.println("GUI.initGUI();");
-		gui.initGUI();
+		// TODO Auto-generated method stub
+		System.out.println("GUIview: Unimplemented method for GUI");
 		
 	}
 

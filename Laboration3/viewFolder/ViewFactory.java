@@ -1,10 +1,8 @@
 
 
-public class ViewFactory {
+public class ViewFactory implements Factory {
 	
 	public view createView(int choice, Controller c) {
-		
-		view v = null;
 		
 		if(choice == 1) {
 			System.out.println("viewFactory: Returning GUI");
@@ -14,7 +12,7 @@ public class ViewFactory {
 			System.out.println("viewFactory: Returning CLI");
 			return new CLIview(c);
 		}
-		return v;
+		return null;
 	}
 
 }

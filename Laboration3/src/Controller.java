@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Controller {
@@ -45,12 +46,13 @@ public class Controller {
 			break;
 			
 		case "saveas":
-				customFile file = view.saveFileDialog();
-				if(file != null) {
+				ArrayList<String> fileHolder = view.saveFileDialog();
+				if(fileHolder != null) {
 					System.out.println("save : file != null");
-					model.saveFile(file);
-					model.setCurrfile(file);
-					file.setHasChanged(false);
+					model.getCurrfile().setFilePath(fileHolder.get(0));
+					model.getCurrfile().setFileName(fileHolder.get(1));
+					model.getCurrfile().setFileContent(fileHolder.get(2));
+					model.saveFile();
 				}
 			break;
 		
@@ -99,23 +101,23 @@ public class Controller {
 	}
 	// No errors 'open' flow!
 	public void openMainFlow() {
-		customFile file2 = view.openFileDialog();
+		ArrayList<String> file2 = view.openFileDialog();
 		if(file2 != null) {
 			view.updateTextArea(model.openFile(file2));
 			model.getCurrfile().setHasChanged(false);
-			model.setCurrfile(file2);
 		}	
 	}
 	// No errors 'save' Flow!
 	public boolean saveMainFlow() {
 		if(model.getCurrfile().getFilePath() == null) {
 			// File has no path
-			customFile file1 = view.saveFileDialog();
-			if(file1 != null) {
+			ArrayList<String> fileHolder = view.saveFileDialog();
+			if(fileHolder != null) {
 				System.out.println("controller: save : file != null");
-				model.saveFile(file1);
-				file1.setHasChanged(false);
-				model.setCurrfile(file1);
+				model.getCurrfile().setFilePath(fileHolder.get(0));
+				model.getCurrfile().setFileName(fileHolder.get(1));
+				model.getCurrfile().setFileContent(fileHolder.get(2));
+				model.saveFile();
 				return true;
 			}else {
 				return false;
@@ -123,11 +125,9 @@ public class Controller {
 		}
 		else {
 			// File has path
-			customFile file1 = model.getCurrfile();
-			file1.setFileContent(view.getTextContent());
-			model.saveFile(file1);
-			file1.setHasChanged(false);
-			model.setCurrfile(file1);
+			model.getCurrfile().setFileContent(view.getTextContent());
+			model.saveFile();
+			//model.saveFile(model.getCurrfile().setFileContent(view.getTextContent()));
 			return true;
 		}
 	}

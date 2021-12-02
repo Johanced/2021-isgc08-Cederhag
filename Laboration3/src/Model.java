@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class Model {
 	private customFile currfile = new customFile();
@@ -15,31 +16,36 @@ public class Model {
 		setCurrfile(file);
 		return file;
 	}
-	public void saveFile(customFile file) {
+	public void saveFile() {
 		  try {
+			  //currfile.setFilePath(fileHolder.get(0));
+			  //currfile.setFileName(fileHolder.get(1));
+			  //currfile.setFileContent(fileHolder.get(2));
 			  
-			  File tempFile = new File(file.getFilePath());
+			  File tempFile = new File(currfile.getFilePath());
 		      FileWriter myWriter = new FileWriter(tempFile, StandardCharsets.UTF_8);
-		      myWriter.write(file.getFileContent());
+		      myWriter.write(currfile.getFileContent());
 		      myWriter.close();
 		      System.out.println("Model: saveFile: Wrote to file. ");
+		      currfile.setHasChanged(false);
 		    } catch (IOException e) {
 		      System.out.println("Model: saveFile: Error.");
 		      e.printStackTrace();
 		    }
 	}
 	
-	public customFile openFile(customFile file) {
+	public customFile openFile(ArrayList<String> list) {
 		char[] buffer = new char[4088];
 		
 		try {
 			customFile cFile = new customFile();
-			FileReader reader = new FileReader(file.getFilePath(), StandardCharsets.UTF_8);
+			FileReader reader = new FileReader(list.get(0), StandardCharsets.UTF_8);
 			reader.read(buffer);
 			String slask = new String(buffer);
 			slask = slask.trim();
 			cFile.setFileContent(slask);
-			cFile.setFileName(file.getFileName());
+			cFile.setFileName(list.get(1));
+			this.setCurrfile(cFile);
 			reader.close();
 			System.out.println("Model: openfile: read from file. ");
 			
