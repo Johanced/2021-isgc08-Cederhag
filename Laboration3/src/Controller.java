@@ -19,7 +19,7 @@ public class Controller {
 		
 		case "new":
 			int code = model.modelErrorChecker("checkChanged");
-			System.out.println("controller code = "+code);
+			//System.out.println("controller code = "+code);
 			if(code == 2) {
 				int choice = view.promptSaveChecker();
 				// Save
@@ -37,7 +37,7 @@ public class Controller {
 				}
 			}
 			// Vanligt flöde 'new'
-			System.out.println("controller: new : newMainFlow()");
+			//System.out.println("controller: new : newMainFlow()");
 			newMainFlow();
 			break;
 			
