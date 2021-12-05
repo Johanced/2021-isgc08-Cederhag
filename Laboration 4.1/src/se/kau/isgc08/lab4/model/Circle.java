@@ -10,6 +10,7 @@ import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 public class Circle extends DrawingShape {
 	
+	private String type = "Circle";
 	
 	public void draw(Graphics g) {
 		di.drawCircle(this,g);
@@ -25,6 +26,7 @@ public class Circle extends DrawingShape {
 		setLineWidth(width);
 		setLineColor(lineColor);
 		setAreaColor(area);
+		setType("Circle");
 		}
 
 }

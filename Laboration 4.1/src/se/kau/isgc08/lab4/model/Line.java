@@ -11,7 +11,6 @@ import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 public class Line extends DrawingShape {
 	
-	
 	public void draw(Graphics g) {
 		di.drawLine(this, g);
 	}
@@ -25,6 +24,7 @@ public class Line extends DrawingShape {
 		setLineWidth(width);
 		setLineColor(color);
 		setAreaColor(Color.BLACK);
+		setType("Line");
 	}
 
 

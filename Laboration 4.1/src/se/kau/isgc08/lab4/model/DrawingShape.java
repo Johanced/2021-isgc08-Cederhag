@@ -3,6 +3,8 @@ package se.kau.isgc08.lab4.model;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import javax.swing.JComponent;
+
 import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 
@@ -17,6 +19,7 @@ public class DrawingShape implements DrawingComposite {
 	/** The di. */
 	DrawingUtilInterface di;
 	
+	String type;
 	/** The width. */
 	int width;
 	
@@ -190,5 +193,46 @@ public class DrawingShape implements DrawingComposite {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public boolean contains(int x, int y) {
+		int temp = 0;
+		if(x >= x1 && x <= width + x1) {
+			temp++;
+		}
+		if(y >= y1 && y <= height + y1) {
+			temp++;
+		}
+		if(temp == 2) {
+			return true;
+		}
+		return false;
+	}
+	public void scale(int direction, int amount) {
+		// Down
+		if(direction == 1) {
+			width+=amount;
+			height+=amount;
+			x1 -= amount/2;
+			y1 -= amount/2;
+		}
+		// Up
+		if(direction == -1) {
+			width-=amount;
+			height-=amount;
+			x1 += amount/2;
+			y1 += amount/2;
+		}
+	}
+
+
 	
 }

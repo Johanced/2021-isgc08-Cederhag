@@ -10,7 +10,7 @@ import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 public class Rect extends DrawingShape {
 
-	
+	private String type = "Rect";
 	public void draw(Graphics g) {
 		di.drawRect(this, g);
 	}
@@ -24,7 +24,7 @@ public class Rect extends DrawingShape {
 		setLineWidth(width);
 		setLineColor(lineColor);
 		setAreaColor(area);
-		
+		setType("Rect");
 	}
 
 }
