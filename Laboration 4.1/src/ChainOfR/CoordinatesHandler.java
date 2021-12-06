@@ -7,6 +7,7 @@ public class CoordinatesHandler extends AbstractHandler {
 	public void handle(String request) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 }

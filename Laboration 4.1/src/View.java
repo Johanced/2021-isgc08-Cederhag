@@ -1,11 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import se.kau.isgc08.lab4.model.DrawingComposite;
@@ -42,6 +45,18 @@ public class View extends JFrame implements ActionListener {
 		JPanel btnPanelSouth = new JPanel(new FlowLayout());
 		JPanel btnPanelNorth = new JPanel(new FlowLayout());
 		
+		JPanel editPanelEast = new JPanel();
+		editPanelEast.setLayout(new BoxLayout(editPanelEast, BoxLayout.Y_AXIS));
+		JLabel label1 = new JLabel("PlaceHolders;");
+		JButton Btn1 = new JButton("Color");
+		JButton Btn2 = new JButton("AreaColor");
+		JButton Btn3 = new JButton("Width");
+		JButton Btn4 = new JButton("Height");
+		editPanelEast.add(label1);
+		editPanelEast.add(Btn1);
+		editPanelEast.add(Btn2);
+		editPanelEast.add(Btn3);
+		editPanelEast.add(Btn4);
 		
 		JButton lineBtn = new JButton("Line");
 		lineBtn.addActionListener(this);
@@ -75,6 +90,7 @@ public class View extends JFrame implements ActionListener {
 		
 		mainPanel.add(btnPanelNorth, BorderLayout.NORTH);
 		mainPanel.add(btnPanelSouth, BorderLayout.SOUTH);
+		mainPanel.add(editPanelEast, BorderLayout.EAST);
 		DrawPanel = new DrawingPanel(new DrawingContainer());
 		DrawPanel.setBackground(Color.WHITE);
 		mainPanel.add(DrawPanel, BorderLayout.CENTER);

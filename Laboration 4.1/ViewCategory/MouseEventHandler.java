@@ -7,7 +7,7 @@ import se.kau.isgc08.lab4.model.DrawingContainer;
 import se.kau.isgc08.lab4.model.DrawingShape;
 import se.kau.isgc08.lab4.view.DrawingPanel;
 
-public class MouseEventHandler implements MouseListener,MouseMotionListener, MouseWheelListener {
+public class MouseEventHandler implements MouseListener,MouseMotionListener, MouseWheelListener, KeyListener {
 	private LinkedList<DrawingShape> shapeList;
 	private DrawingShape selShape;
 	private View view;
@@ -18,7 +18,9 @@ public class MouseEventHandler implements MouseListener,MouseMotionListener, Mou
 		DrawPanel.addMouseListener(this);
 		DrawPanel.addMouseMotionListener(this); 
 		DrawPanel.addMouseWheelListener(this);
+		view.addKeyListener(this);
 		shapeList = new LinkedList<DrawingShape>();
+		
 		
 	}
 	// Adda alla shapes till mouse listener!
@@ -46,6 +48,7 @@ public class MouseEventHandler implements MouseListener,MouseMotionListener, Mou
 		for (DrawingShape shape : shapeList) {
 			//System.out.println("shapeX : "+shape.getX1()+ " shapeY : "+shape.getY1());
 			if(shape.contains(e.getX(), e.getY())) {
+
 			 System.out.println("HIT:name: "+shape.getType());
 			 selShape = shape;
 			}
@@ -58,6 +61,7 @@ public class MouseEventHandler implements MouseListener,MouseMotionListener, Mou
 		if(selShape != null) {
 			if (selShape.contains(e.getPoint().x, e.getPoint().y)) {
 				offset = new Point(e.getPoint().x - selShape.getX1(),e.getPoint().y - selShape.getY1());
+				//selShape.enableHelpRect(true);
 	        }
 		}
 		
@@ -66,6 +70,7 @@ public class MouseEventHandler implements MouseListener,MouseMotionListener, Mou
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+		//selShape.enableHelpRect(false);
 		offset = null;
 		
 	}
@@ -73,13 +78,6 @@ public class MouseEventHandler implements MouseListener,MouseMotionListener, Mou
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		for (DrawingShape shape : shapeList) {
-			//System.out.println("shapeX : "+shape.getX1()+ " shapeY : "+shape.getY1());
-			if(shape.contains(e.getX(), e.getY())) {
-			 System.out.println("HIT:name: "+shape.getType());
-			 selShape = shape;
-			}
-		}
 		
 	}
 
@@ -125,11 +123,35 @@ public class MouseEventHandler implements MouseListener,MouseMotionListener, Mou
 				System.out.println("mouse dragging...");
 				selShape.setX1(newX);
 				selShape.setY1(newY);
+				//selShape.getHelpRect().setX1(newX);
+				//selShape.getHelpRect().setY1(newY);
 				view.repaint();
 			}
 			
 		}
 	
+		
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("key Pressed");
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("key Pressed");
+	}
+	@Override
+	public void keyReleased(KeyEvent key) {
+		// TODO Auto-generated method stub
+		System.out.println("key Pressed");
+		
+		/*System.out.println("KLEY PRESSED");
+		if(key.getKeyCode() == KeyEvent.VK_DELETE) {
+			System.out.println("DELETE: Pressed");
+		}
+		*/
 		
 	}
 

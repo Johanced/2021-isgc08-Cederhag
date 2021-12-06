@@ -10,10 +10,12 @@ import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 public class Circle extends DrawingShape {
 	
+	//private HelpRect helpRect;
 	private String type = "Circle";
 	
 	public void draw(Graphics g) {
 		di.drawCircle(this,g);
+		//di.drawRect(helpRect, g);
 	}
 
 	
@@ -27,6 +29,7 @@ public class Circle extends DrawingShape {
 		setLineColor(lineColor);
 		setAreaColor(area);
 		setType("Circle");
+		//setHelpRect(this.helpRect = new HelpRect(di, x1, y1, w, h));
 		}
 
 }

@@ -11,8 +11,10 @@ import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 public class Rect extends DrawingShape {
 
 	private String type = "Rect";
+	//private HelpRect helpRect;
 	public void draw(Graphics g) {
 		di.drawRect(this, g);
+		//di.drawRect(helpRect, g);
 	}
 	
 	public Rect(DrawingUtilInterface di, int x1, int y1, int w, int h, int width, Color lineColor, Color area) {
@@ -25,6 +27,7 @@ public class Rect extends DrawingShape {
 		setLineColor(lineColor);
 		setAreaColor(area);
 		setType("Rect");
+		//setHelpRect(this.helpRect = new HelpRect(di, x1, y1, w, h));
 	}
 
 }

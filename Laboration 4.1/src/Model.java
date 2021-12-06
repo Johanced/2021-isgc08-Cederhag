@@ -37,6 +37,9 @@ public class Model {
 	public void removeLeaf(DrawingShape shape) {
 		currentDC.remove(shape);
 	}
+	public void startEditChain() {
+		//TODO; Edit shape -> Sker i chain -> color, linecolor, areaColor, width, height, 
+	}
 	public void writeObjectToFile() {
 		try {
 			 
@@ -79,6 +82,11 @@ public class Model {
 		
 		return new Rect(da, x1, y1, x2, y2, width, color, area);
 	}
+	/*public HelpRect createHelpRect(int x1, int y1, int width, int height) {
+		
+		return new HelpRect(da, x1, y1, width, height);	
+	}
+	*/
 	public void setCurrentDC(DrawingContainer d) {
 		currentDC = d;
 	}

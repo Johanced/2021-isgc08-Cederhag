@@ -18,7 +18,9 @@ public class DrawingShape implements DrawingComposite {
 	
 	/** The di. */
 	DrawingUtilInterface di;
-	
+	// HelpRectangle
+	//HelpRect helpRect;
+	// Type
 	String type;
 	/** The width. */
 	int width;
@@ -202,6 +204,23 @@ public class DrawingShape implements DrawingComposite {
 	public String getType() {
 		return type;
 	}
+	/*public HelpRect getHelpRect() {
+		return helpRect;
+	}
+
+	public void setHelpRect(HelpRect helpRect) {
+		this.helpRect = helpRect;
+	}
+	*/
+	/*public void enableHelpRect(Boolean enable) {
+		if(enable == true) {
+			helpRect.setLineColor(new Color(0.2f,0f,0f,1f));
+		}
+		if(enable == false) {
+			helpRect.setLineColor(new Color(0f,0f,0f,0f));
+		}
+	}
+	*/
 	
 	public boolean contains(int x, int y) {
 		int temp = 0;

@@ -10,6 +10,7 @@ public abstract class AbstractHandler {
 		if(nextHandler != null) {
 			nextHandler.handle(request);
 		}
+		
 	}
 	
 	
