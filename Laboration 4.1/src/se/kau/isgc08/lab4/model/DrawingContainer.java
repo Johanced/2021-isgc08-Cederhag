@@ -17,7 +17,7 @@ import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 public class DrawingContainer implements DrawingComposite, Cloneable {
 	
 	/** The v This attribute will keep the leaf for this container. */
-	public Vector<DrawingComposite> v;
+	private Vector<DrawingComposite> v;
 	
 	
 	
@@ -26,6 +26,10 @@ public class DrawingContainer implements DrawingComposite, Cloneable {
 	 */
 	public DrawingContainer() {
 		v=new Vector<DrawingComposite>();
+	}
+	
+	public Vector<DrawingComposite> getVector(){
+		return v;
 	}
 	
 	/**

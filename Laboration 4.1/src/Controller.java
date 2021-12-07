@@ -14,7 +14,7 @@ public class Controller {
 			
 		switch(event) {
 		// TestCase
-		case "1": System.out.println("c: TestCase 1"); v.drawResult(m.exampleTest());
+		case "1": System.out.println("c: TestCase 1"); v.drawResult(m.exampleTest(v.getDrawUtil()));
 			break;
 		// Save
 		case "2": 	System.out.println("c: Save 2");  m.writeObjectToFile();			
@@ -24,17 +24,17 @@ public class Controller {
 			break;
 		// Create Line
 		case "Line": System.out.println("c: Line");
-					 m.addLeafToComposite(m.createLine(37,250,50,50,7,Color.RED));
+					 m.addLeafToComposite(m.createLine(v.getDrawUtil(),37,250,50,50,7,Color.RED));
 					 v.drawResult(m.getCurrentDC());
 			break;
 		// Create Rect
 		case "Rect": System.out.println("c: Rect"); 
-					  m.addLeafToComposite(m.createRect(125,250,50,50,1,Color.RED, Color.BLUE));
+					  m.addLeafToComposite(m.createRect(v.getDrawUtil(),125,250,50,50,1,Color.RED, Color.BLUE));
 					  v.drawResult(m.getCurrentDC());
 			break;
 		// Create Circle
 		case "Circle": System.out.println("c: Circle"); 
-						m.addLeafToComposite(m.createCircle(225,250,50,50,4,Color.YELLOW, Color.BLACK));
+						m.addLeafToComposite(m.createCircle(v.getDrawUtil(),225,250,50,50,4,Color.YELLOW, Color.BLACK));
 						v.drawResult(m.getCurrentDC());
 			break;
 		}

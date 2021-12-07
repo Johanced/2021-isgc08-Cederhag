@@ -7,7 +7,7 @@ import se.kau.isgc08.lab4.model.DrawingContainer;
 import se.kau.isgc08.lab4.model.DrawingShape;
 import se.kau.isgc08.lab4.view.DrawingPanel;
 
-public class MouseEventHandler implements MouseListener,MouseMotionListener, MouseWheelListener, KeyListener {
+public class MouseEventHandler implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
 	private LinkedList<DrawingShape> shapeList;
 	private DrawingShape selShape;
 	private View view;
@@ -26,7 +26,7 @@ public class MouseEventHandler implements MouseListener,MouseMotionListener, Mou
 	// Adda alla shapes till mouse listener!
 	public void addObjectsMouseListenerList(DrawingContainer shapeContainer) {
 		
-		for (DrawingComposite shape : shapeContainer.v) {
+		for (DrawingComposite shape : shapeContainer.getVector()) {
 			System.out.println("Added: "+shape.getClass());
 			DrawingShape newShape = (DrawingShape) shape;
 			shapeList.add(newShape);

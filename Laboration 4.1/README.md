@@ -1,7 +1,7 @@
-# **Laboration 4**
+# **Laboration 4.1**
 
 
 
-## AdapterPattern : Example from GeeksgforGeeks
+## Class diagram
 
-![AdapterPatternExample.drawio](./UML/AdapterPatternExample.drawio.png)
+![Labb_4.1_ClassDiagram.drawio](./UML/Labb_4.1_ClassDiagram.drawio.png)

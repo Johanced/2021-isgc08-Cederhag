@@ -25,7 +25,7 @@ public class View extends JFrame implements ActionListener {
 	
 	public View(Controller c) {
 		this.c = c;
-		DU = new DrawingUtil();
+		setDrawUtil(new DrawingUtil());
 		
 		initGUI();
 		// Menubar for additional functionlity -> File handling etc..
@@ -113,6 +113,14 @@ public class View extends JFrame implements ActionListener {
 		System.out.println("view : "+btnClicked);
 		c.handleEvent(btnClicked);
 		
+	}
+
+	public DrawingUtil getDrawUtil() {
+		return DU;
+	}
+
+	public void setDrawUtil(DrawingUtil dU) {
+		DU = dU;
 	}
 
 }

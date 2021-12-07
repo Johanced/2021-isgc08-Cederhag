@@ -14,15 +14,15 @@ import se.kau.isgc08.lab4.model.Rect;
 import se.kau.isgc08.lab4.view.DrawingUtil;
 
 public class Model {
-	private DrawingUtil da;
+	//private DrawingUtil da;
 	private DrawingContainer currentDC;
 	
 	public Model() {
-		da=new DrawingUtil();
+		//da=new DrawingUtil();
 		currentDC = new DrawingContainer();
 	}
 	// EXAMPLE
-	public DrawingContainer exampleTest() {
+	public DrawingContainer exampleTest(DrawingUtil da) {
 		DrawingContainer container = new DrawingContainer();
 		Line l=new Line(da,50,3,75,50,1,Color.RED);
 		container.add(l);
@@ -70,17 +70,17 @@ public class Model {
 		return currentDC;
 	}
 	
-	public Circle createCircle(int x1, int y1, int x2, int y2, int width, Color color, Color area) {
+	public Circle createCircle(DrawingUtil DU,int x1, int y1, int x2, int y2, int width, Color color, Color area) {
 		
-		return new Circle(da, x1, y1, x2, y2, width, color, area);
+		return new Circle(DU, x1, y1, x2, y2, width, color, area);
 	}
-	public Line createLine(int x1, int y1, int x2, int y2, int width, Color color) {
+	public Line createLine(DrawingUtil DU,int x1, int y1, int x2, int y2, int width, Color color) {
 		
-		return new Line(da, x1, y1, x2, y2, width, color);
+		return new Line(DU, x1, y1, x2, y2, width, color);
 	}
-	public Rect createRect(int x1, int y1, int x2, int y2, int width, Color color, Color area) {
+	public Rect createRect(DrawingUtil DU,int x1, int y1, int x2, int y2, int width, Color color, Color area) {
 		
-		return new Rect(da, x1, y1, x2, y2, width, color, area);
+		return new Rect(DU, x1, y1, x2, y2, width, color, area);
 	}
 	/*public HelpRect createHelpRect(int x1, int y1, int width, int height) {
 		
