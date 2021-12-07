@@ -29,13 +29,27 @@ public class Controller {
 			break;
 		// Create Rect
 		case "Rect": System.out.println("c: Rect"); 
-					  m.addLeafToComposite(m.createRect(v.getDrawUtil(),125,250,50,50,1,Color.RED, Color.BLUE));
+					  m.addLeafToComposite(m.createRect(v.getDrawUtil(),125,250,50,50,10,Color.RED, Color.BLUE));
 					  v.drawResult(m.getCurrentDC());
 			break;
 		// Create Circle
 		case "Circle": System.out.println("c: Circle"); 
 						m.addLeafToComposite(m.createCircle(v.getDrawUtil(),225,250,50,50,4,Color.YELLOW, Color.BLACK));
 						v.drawResult(m.getCurrentDC());
+			break;
+			
+		case "LineColor": // Set line color on selShape! Temporary
+							Color holder = v.showColorPicker();
+							System.out.println("controller: Color picked: "+holder.getClass());
+							m.getSpecificShape(v.getSelectedShapeIndex()).setLineColor(holder);;
+							v.repaintView();
+		
+			break;
+		case "AreaColor": // Set Area color on selShape!
+							v.showColorPicker();
+			break;
+			
+		case "EditCommands": // Chain ska startas här med input från view -> ArrayList<String> Commands
 			break;
 		}
 	}

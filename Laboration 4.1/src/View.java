@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import se.kau.isgc08.lab4.model.DrawingComposite;
 import se.kau.isgc08.lab4.model.DrawingContainer;
+import se.kau.isgc08.lab4.model.DrawingShape;
 import se.kau.isgc08.lab4.view.DrawingPanel;
 import se.kau.isgc08.lab4.view.DrawingUtil;
 
@@ -22,6 +23,7 @@ public class View extends JFrame implements ActionListener {
 	private JPanel mainPanel;
 	private DrawingPanel DrawPanel;
 	private MouseEventHandler MouseHandler;
+	private colorPickerHandler colorPickerHandler;
 	
 	public View(Controller c) {
 		this.c = c;
@@ -34,9 +36,11 @@ public class View extends JFrame implements ActionListener {
 		// Handle mouse events!
 		MouseHandler = new MouseEventHandler(DrawPanel, this);
 		
+		colorPickerHandler = new colorPickerHandler(this);
+		
 		this.add(mainPanel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(500,500);
+		this.setSize(800,500);
 		this.setVisible(true);
 	}
 	
@@ -47,16 +51,18 @@ public class View extends JFrame implements ActionListener {
 		
 		JPanel editPanelEast = new JPanel();
 		editPanelEast.setLayout(new BoxLayout(editPanelEast, BoxLayout.Y_AXIS));
-		JLabel label1 = new JLabel("PlaceHolders;");
-		JButton Btn1 = new JButton("Color");
-		JButton Btn2 = new JButton("AreaColor");
-		JButton Btn3 = new JButton("Width");
-		JButton Btn4 = new JButton("Height");
-		editPanelEast.add(label1);
-		editPanelEast.add(Btn1);
-		editPanelEast.add(Btn2);
-		editPanelEast.add(Btn3);
-		editPanelEast.add(Btn4);
+		
+		JButton chooseLineColorBtn = new JButton("Line Color");
+		chooseLineColorBtn.addActionListener(this);
+		chooseLineColorBtn.setActionCommand("LineColor");
+		JButton chooseAreaColorBtn = new JButton("Area Color");
+		chooseAreaColorBtn.addActionListener(this);
+		chooseAreaColorBtn.setActionCommand("AreaColor");
+		JButton editChangesBtn = new JButton("Confirm changes");
+		EditGUIPanel editPanel = new EditGUIPanel(editChangesBtn,chooseLineColorBtn, chooseAreaColorBtn);
+		editChangesBtn.addActionListener(this);
+		editChangesBtn.setActionCommand("ConfirmChanges");
+
 		
 		JButton lineBtn = new JButton("Line");
 		lineBtn.addActionListener(this);
@@ -90,7 +96,7 @@ public class View extends JFrame implements ActionListener {
 		
 		mainPanel.add(btnPanelNorth, BorderLayout.NORTH);
 		mainPanel.add(btnPanelSouth, BorderLayout.SOUTH);
-		mainPanel.add(editPanelEast, BorderLayout.EAST);
+		mainPanel.add(editPanel, BorderLayout.EAST);
 		DrawPanel = new DrawingPanel(new DrawingContainer());
 		DrawPanel.setBackground(Color.WHITE);
 		mainPanel.add(DrawPanel, BorderLayout.CENTER);
@@ -121,6 +127,17 @@ public class View extends JFrame implements ActionListener {
 
 	public void setDrawUtil(DrawingUtil dU) {
 		DU = dU;
+	}
+	public Color showColorPicker() {
+		return colorPickerHandler.showColorPicker();
+	}
+	public int getSelectedShapeIndex() {
+		int slask = MouseHandler.getSelectedShapeByIndex();
+		return slask;
+		
+	}
+	public void repaintView() {
+		this.repaint();
 	}
 
 }

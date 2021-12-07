@@ -27,10 +27,11 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 	public void addObjectsMouseListenerList(DrawingContainer shapeContainer) {
 		
 		for (DrawingComposite shape : shapeContainer.getVector()) {
-			System.out.println("Added: "+shape.getClass());
-			DrawingShape newShape = (DrawingShape) shape;
-			shapeList.add(newShape);
-		
+			if(!shapeList.contains(shape)) {
+				System.out.println("Added: "+shape.getClass());
+				DrawingShape newShape = (DrawingShape) shape;
+				shapeList.add(newShape);
+			}
 		}
 	}
 	
@@ -45,6 +46,19 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 		}
 	
 	public void mouseMoved(MouseEvent e) {
+		/*for (DrawingShape shape : shapeList) {
+			//System.out.println("shapeX : "+shape.getX1()+ " shapeY : "+shape.getY1());
+			if(shape.contains(e.getX(), e.getY())) {
+
+			 System.out.println("HIT:name: "+shape.getType());
+			 selShape = shape;
+			}
+		}*/
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
 		for (DrawingShape shape : shapeList) {
 			//System.out.println("shapeX : "+shape.getX1()+ " shapeY : "+shape.getY1());
 			if(shape.contains(e.getX(), e.getY())) {
@@ -53,14 +67,10 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 			 selShape = shape;
 			}
 		}
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		if(selShape != null) {
 			if (selShape.contains(e.getPoint().x, e.getPoint().y)) {
 				offset = new Point(e.getPoint().x - selShape.getX1(),e.getPoint().y - selShape.getY1());
+				
 				//selShape.enableHelpRect(true);
 	        }
 		}
@@ -131,6 +141,12 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 		}
 	
 		
+	}
+	
+	public int getSelectedShapeByIndex() {
+		int index = shapeList.indexOf(selShape);
+		System.out.println("mouseHandler: Returning index :"+index);
+		return index;
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {

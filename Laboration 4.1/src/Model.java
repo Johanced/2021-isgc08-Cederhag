@@ -5,8 +5,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Vector;
 
+import ChainOfR.AbstractHandler;
+import ChainOfR.CoordinatesHandler;
 import se.kau.isgc08.lab4.model.Circle;
+import se.kau.isgc08.lab4.model.DrawingComposite;
 import se.kau.isgc08.lab4.model.DrawingContainer;
 import se.kau.isgc08.lab4.model.DrawingShape;
 import se.kau.isgc08.lab4.model.Line;
@@ -20,6 +25,9 @@ public class Model {
 	public Model() {
 		//da=new DrawingUtil();
 		currentDC = new DrawingContainer();
+		
+		AbstractHandler BossHandler;
+		CoordinatesHandler coordHandler = new CoordinatesHandler();
 	}
 	// EXAMPLE
 	public DrawingContainer exampleTest(DrawingUtil da) {
@@ -30,6 +38,13 @@ public class Model {
 		
 		return container;
 	}
+	public DrawingShape getSpecificShape(int index) {
+		Vector<DrawingComposite> temp = currentDC.getVector();
+		DrawingShape selectedShape = (DrawingShape) temp.get(index);
+		System.out.println("model: Shape selected by index : "+selectedShape.getLineColor());
+		
+		return selectedShape;
+	}
 	public void addLeafToComposite(DrawingShape shape) {
 		currentDC.add(shape);
 		System.out.println("shape added: "+shape.getHeight());
@@ -37,8 +52,12 @@ public class Model {
 	public void removeLeaf(DrawingShape shape) {
 		currentDC.remove(shape);
 	}
-	public void startEditChain() {
+	public void startEditChain(ArrayList<String> commands) {
 		//TODO; Edit shape -> Sker i chain -> color, linecolor, areaColor, width, height, 
+		// Commands contains -> []
+	}
+	public void changeShapeLineColor(DrawingShape slaskShape, Color pickedColor) {
+		slaskShape.setLineColor(pickedColor);
 	}
 	public void writeObjectToFile() {
 		try {
