@@ -8,12 +8,7 @@ public abstract class AbstractHandler {
 	public void setNextHandler(AbstractHandler nextHandler) {
 		this.nextHandler = nextHandler;
 	}
-	public void handle(ArrayList<String> commands) {
-		if(nextHandler != null) {
-			nextHandler.handle(commands);
-		}
-		
-	}
+	public abstract void handle(shapeSettings settings);
 	
 	
 

@@ -1,17 +1,15 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import se.kau.isgc08.lab4.model.DrawingComposite;
+import ChainOfR.shapeSettings;
 import se.kau.isgc08.lab4.model.DrawingContainer;
 import se.kau.isgc08.lab4.model.DrawingShape;
 import se.kau.isgc08.lab4.view.DrawingPanel;
@@ -24,6 +22,7 @@ public class View extends JFrame implements ActionListener {
 	private DrawingPanel DrawPanel;
 	private MouseEventHandler MouseHandler;
 	private colorPickerHandler colorPickerHandler;
+	private EditGUIPanel editGUIPanel;
 	
 	public View(Controller c) {
 		this.c = c;
@@ -59,7 +58,7 @@ public class View extends JFrame implements ActionListener {
 		chooseAreaColorBtn.addActionListener(this);
 		chooseAreaColorBtn.setActionCommand("AreaColor");
 		JButton editChangesBtn = new JButton("Confirm changes");
-		EditGUIPanel editPanel = new EditGUIPanel(editChangesBtn,chooseLineColorBtn, chooseAreaColorBtn);
+		editGUIPanel = new EditGUIPanel(editChangesBtn,chooseLineColorBtn, chooseAreaColorBtn);
 		editChangesBtn.addActionListener(this);
 		editChangesBtn.setActionCommand("ConfirmChanges");
 
@@ -96,7 +95,7 @@ public class View extends JFrame implements ActionListener {
 		
 		mainPanel.add(btnPanelNorth, BorderLayout.NORTH);
 		mainPanel.add(btnPanelSouth, BorderLayout.SOUTH);
-		mainPanel.add(editPanel, BorderLayout.EAST);
+		mainPanel.add(editGUIPanel, BorderLayout.EAST);
 		DrawPanel = new DrawingPanel(new DrawingContainer());
 		DrawPanel.setBackground(Color.WHITE);
 		mainPanel.add(DrawPanel, BorderLayout.CENTER);
@@ -107,10 +106,10 @@ public class View extends JFrame implements ActionListener {
 	}
 	
 	public void drawResult(DrawingContainer DC) {
+		MouseHandler.setShapeCont(DC);
 		DrawPanel.setDc(DC);
-		MouseHandler.addObjectsMouseListenerList(DC);
+		//MouseHandler.addObjectsMouseListenerList(DC);
 		this.repaint();
-		//this.setVisible(true);
 	}
 
 	@Override
@@ -131,13 +130,33 @@ public class View extends JFrame implements ActionListener {
 	public Color showColorPicker() {
 		return colorPickerHandler.showColorPicker();
 	}
-	public int getSelectedShapeIndex() {
+	// Inte använd!
+	/*public int getSelectedShapeIndex() {
 		int slask = MouseHandler.getSelectedShapeByIndex();
 		return slask;
 		
 	}
+	*/
+	public DrawingShape getSelectedShape() {
+		return MouseHandler.getSelectedShape();
+		
+	}
+	
+	public void updateEditPanelSettings() {
+		//TODO; Uppdatera editGuiPanels settings till den nuvarande selected Shape!
+	}
 	public void repaintView() {
 		this.repaint();
+	}
+	public shapeSettings constructShapeSettings() {
+		int x1 = MouseHandler.getSelectedShape().getX1();
+		int y1 = MouseHandler.getSelectedShape().getY1();
+		int width = editGUIPanel.getWidthFieldText();
+		int height = editGUIPanel.getHeightFieldText();
+		int lineWidth = editGUIPanel.getLineWidthFieldText();
+		shapeSettings setting = new shapeSettings(x1,y1,width, height, lineWidth);
+		
+		return setting;
 	}
 
 }

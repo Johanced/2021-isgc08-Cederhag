@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.util.Enumeration;
 import java.util.Vector;
 
+import ChainOfR.shapeSettings;
 import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 
@@ -152,8 +153,36 @@ public class DrawingContainer implements DrawingComposite, Cloneable {
 			t= e.nextElement();
 			t.setDrawingAPI(di);
 		}
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
+	
+
+	@Override
+	public DrawingShape getLeafMatchingCoords(int x1, int y1) {
+		DrawingComposite temp;
+		Enumeration<DrawingComposite> e=v.elements();
+		while(e.hasMoreElements()) {
+			temp = e.nextElement();
+			DrawingShape slask = temp.getLeafMatchingCoords(x1, y1);
+			if(slask != null) {
+				return slask;
+			}
+		}
+		return null;
+	}
+	
+	public void delegateSettingToLeaf(shapeSettings setting) {
+		DrawingComposite temp;
+		Enumeration<DrawingComposite> e=v.elements();
+		
+		while(e.hasMoreElements()) {
+			temp = e.nextElement();
+			temp.delegateSettingToLeaf(setting);
+
+			
+		}
+	}
+
+
 	
 }

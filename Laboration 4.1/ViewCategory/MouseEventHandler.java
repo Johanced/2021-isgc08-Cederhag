@@ -9,6 +9,7 @@ import se.kau.isgc08.lab4.view.DrawingPanel;
 
 public class MouseEventHandler implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
 	private LinkedList<DrawingShape> shapeList;
+	private DrawingContainer shapeContainer;
 	private DrawingShape selShape;
 	private View view;
 	private Point offset;
@@ -23,16 +24,12 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 		
 		
 	}
+	public void setShapeCont(DrawingContainer shapeCont) {
+		this.shapeContainer = shapeCont;
+	}
 	// Adda alla shapes till mouse listener!
-	public void addObjectsMouseListenerList(DrawingContainer shapeContainer) {
-		
-		for (DrawingComposite shape : shapeContainer.getVector()) {
-			if(!shapeList.contains(shape)) {
-				System.out.println("Added: "+shape.getClass());
-				DrawingShape newShape = (DrawingShape) shape;
-				shapeList.add(newShape);
-			}
-		}
+	public void addObjectsMouseListenerList() {
+		// TOOOMMM
 	}
 	
 
@@ -58,22 +55,12 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		for (DrawingShape shape : shapeList) {
-			//System.out.println("shapeX : "+shape.getX1()+ " shapeY : "+shape.getY1());
-			if(shape.contains(e.getX(), e.getY())) {
-
-			 System.out.println("HIT:name: "+shape.getType());
-			 selShape = shape;
-			}
-		}
-		if(selShape != null) {
-			if (selShape.contains(e.getPoint().x, e.getPoint().y)) {
-				offset = new Point(e.getPoint().x - selShape.getX1(),e.getPoint().y - selShape.getY1());
-				
-				//selShape.enableHelpRect(true);
-	        }
-		}
+		if(shapeContainer != null) {
+			selShape = shapeContainer.getLeafMatchingCoords(e.getX(), e.getY());
+				if(selShape != null) {
+					offset = new Point(e.getPoint().x - selShape.getX1(),e.getPoint().y - selShape.getY1());
+				}
+		}	
 		
 	}
 
@@ -82,6 +69,7 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 		// TODO Auto-generated method stub
 		//selShape.enableHelpRect(false);
 		offset = null;
+		System.out.println("offset: "+offset);
 		
 	}
 
@@ -96,41 +84,42 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 		// TODO Auto-generated method stub
 		
 	}
-	// Använd för att förstora objekt efter användaren valt!
+
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		// TODO Auto-generated method stub
 		 if (e.getWheelRotation() < 0) {
-	          System.out.println("Up... " + e.getWheelRotation());
+	          //System.out.println("Up... " + e.getWheelRotation());
 	          if(selShape != null) {
 	        	  selShape.scale(e.getWheelRotation(), e.getScrollAmount());
 	        	  view.repaint();
 	          }
 	          
 	        } else {
-	          System.out.println("Down... " + e.getWheelRotation());
+	          //System.out.println("Down... " + e.getWheelRotation());
 	          if(selShape != null) {
 	        	  selShape.scale(e.getWheelRotation(), e.getScrollAmount());
 	        	  view.repaint();
 	          }
 	        }
-	        System.out.println("ScrollAmount: " + e.getScrollAmount());
+	        //System.out.println("ScrollAmount: " + e.getScrollAmount());
 
 	        if (e.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
-	          System.out.println("MouseWheelEvent.WHEEL_UNIT_SCROLL");
+	          //System.out.println("MouseWheelEvent.WHEEL_UNIT_SCROLL");
 	        }
 
 	        if (e.getScrollType() == MouseWheelEvent.WHEEL_BLOCK_SCROLL) {
-	          System.out.println("MouseWheelEvent.WHEEL_BLOCK_SCROLL");
+	          //System.out.println("MouseWheelEvent.WHEEL_BLOCK_SCROLL");
 	        }
 	      }
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		//TODO; Addera LineWidth till selektion!!! kan ej flytta på figurer med bredare lineWidth än body!!
 		if(selShape != null) {
 			if(offset != null) {
 				int newX = e.getPoint().x - offset.x;
 				int newY = e.getPoint().y - offset.y;
-				System.out.println("mouse dragging...");
+				//System.out.println("mouse dragging...");
 				selShape.setX1(newX);
 				selShape.setY1(newY);
 				//selShape.getHelpRect().setX1(newX);
@@ -148,6 +137,11 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 		System.out.println("mouseHandler: Returning index :"+index);
 		return index;
 	}
+	public DrawingShape getSelectedShape() {
+		return selShape;
+	}
+	
+	//TODO; Addera Delete-funktion med Knapp tryck!!
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub

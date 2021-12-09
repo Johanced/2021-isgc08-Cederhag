@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import ChainOfR.AbstractHandler;
 import ChainOfR.CoordinatesHandler;
+import ChainOfR.shapeSettings;
 import se.kau.isgc08.lab4.model.Circle;
 import se.kau.isgc08.lab4.model.DrawingComposite;
 import se.kau.isgc08.lab4.model.DrawingContainer;
@@ -19,15 +20,14 @@ import se.kau.isgc08.lab4.model.Rect;
 import se.kau.isgc08.lab4.view.DrawingUtil;
 
 public class Model {
-	//private DrawingUtil da;
 	private DrawingContainer currentDC;
 	
 	public Model() {
-		//da=new DrawingUtil();
 		currentDC = new DrawingContainer();
 		
-		AbstractHandler BossHandler;
-		CoordinatesHandler coordHandler = new CoordinatesHandler();
+		// Not implemented
+		//AbstractHandler BossHandler;
+		//CoordinatesHandler coordHandler = new CoordinatesHandler();
 	}
 	// EXAMPLE
 	public DrawingContainer exampleTest(DrawingUtil da) {
@@ -38,26 +38,29 @@ public class Model {
 		
 		return container;
 	}
-	public DrawingShape getSpecificShape(int index) {
+	/*public DrawingShape getSpecificShape(int index) {
 		Vector<DrawingComposite> temp = currentDC.getVector();
 		DrawingShape selectedShape = (DrawingShape) temp.get(index);
 		System.out.println("model: Shape selected by index : "+selectedShape.getLineColor());
 		
 		return selectedShape;
 	}
+	*/
 	public void addLeafToComposite(DrawingShape shape) {
 		currentDC.add(shape);
-		System.out.println("shape added: "+shape.getHeight());
 	}
 	public void removeLeaf(DrawingShape shape) {
 		currentDC.remove(shape);
 	}
-	public void startEditChain(ArrayList<String> commands) {
+	public void startEditChain(shapeSettings setting) {
 		//TODO; Edit shape -> Sker i chain -> color, linecolor, areaColor, width, height, 
-		// Commands contains -> []
+		currentDC.delegateSettingToLeaf(setting);
 	}
 	public void changeShapeLineColor(DrawingShape slaskShape, Color pickedColor) {
 		slaskShape.setLineColor(pickedColor);
+	}
+	public void changeShapeAreaColor(DrawingShape slaskShape, Color pickedColor) {
+		slaskShape.setAreaColor(pickedColor);
 	}
 	public void writeObjectToFile() {
 		try {

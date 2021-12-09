@@ -14,42 +14,46 @@ public class Controller {
 			
 		switch(event) {
 		// TestCase
-		case "1": System.out.println("c: TestCase 1"); v.drawResult(m.exampleTest(v.getDrawUtil()));
+		case "1": System.out.println("c: TestCase 1"); 
+						v.drawResult(m.exampleTest(v.getDrawUtil()));
 			break;
 		// Save
-		case "2": 	System.out.println("c: Save 2");  m.writeObjectToFile();			
+		case "2": System.out.println("c: Save 2");  
+						m.writeObjectToFile();			
 			break;
 		// Open
-		case "3": System.out.println("c: Open 3"); v.drawResult(m.readObjectFromFile());
+		case "3": System.out.println("c: Open 3"); 
+						v.drawResult(m.readObjectFromFile());
 			break;
 		// Create Line
 		case "Line": System.out.println("c: Line");
-					 m.addLeafToComposite(m.createLine(v.getDrawUtil(),37,250,50,50,7,Color.RED));
-					 v.drawResult(m.getCurrentDC());
+						m.addLeafToComposite(m.createLine(v.getDrawUtil(),37,250,50,50,7,Color.RED));
+						v.drawResult(m.getCurrentDC());
 			break;
 		// Create Rect
 		case "Rect": System.out.println("c: Rect"); 
-					  m.addLeafToComposite(m.createRect(v.getDrawUtil(),125,250,50,50,10,Color.RED, Color.BLUE));
-					  v.drawResult(m.getCurrentDC());
+						m.addLeafToComposite(m.createRect(v.getDrawUtil(),125,250,50,50,10,Color.RED, Color.BLUE));
+						v.drawResult(m.getCurrentDC());
 			break;
 		// Create Circle
 		case "Circle": System.out.println("c: Circle"); 
-						m.addLeafToComposite(m.createCircle(v.getDrawUtil(),225,250,50,50,4,Color.YELLOW, Color.BLACK));
-						v.drawResult(m.getCurrentDC());
+					 	m.addLeafToComposite(m.createCircle(v.getDrawUtil(),225,250,50,50,4,Color.YELLOW, Color.BLACK));
+					 	v.drawResult(m.getCurrentDC());
 			break;
 			
 		case "LineColor": // Set line color on selShape! Temporary
-							Color holder = v.showColorPicker();
-							System.out.println("controller: Color picked: "+holder.getClass());
-							m.getSpecificShape(v.getSelectedShapeIndex()).setLineColor(holder);;
-							v.repaintView();
-		
+						m.changeShapeLineColor(v.getSelectedShape(), v.showColorPicker());
+						v.repaintView();
+						
 			break;
 		case "AreaColor": // Set Area color on selShape!
-							v.showColorPicker();
+						m.changeShapeAreaColor(v.getSelectedShape(), v.showColorPicker());
+						v.repaintView();
 			break;
 			
-		case "EditCommands": // Chain ska startas här med input från view -> ArrayList<String> Commands
+		case "ConfirmChanges": // Chain ska startas här med input från view -> ArrayList<String> Commands
+						m.startEditChain(v.constructShapeSettings());
+						v.repaintView();
 			break;
 		}
 	}

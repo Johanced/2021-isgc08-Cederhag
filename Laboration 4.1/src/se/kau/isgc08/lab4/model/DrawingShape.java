@@ -2,9 +2,11 @@ package se.kau.isgc08.lab4.model;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Enumeration;
 
 import javax.swing.JComponent;
 
+import ChainOfR.shapeSettings;
 import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 
@@ -22,6 +24,7 @@ public class DrawingShape implements DrawingComposite {
 	//HelpRect helpRect;
 	// Type
 	String type;
+
 	/** The width. */
 	int width;
 	
@@ -221,8 +224,8 @@ public class DrawingShape implements DrawingComposite {
 		}
 	}
 	*/
-	
-	public boolean contains(int x, int y) {
+	// TA BORT
+	/*public boolean contains(int x, int y) {
 		int temp = 0;
 		if(x >= x1 && x <= width + x1) {
 			temp++;
@@ -235,6 +238,8 @@ public class DrawingShape implements DrawingComposite {
 		}
 		return false;
 	}
+	*/
+	
 	public void scale(int direction, int amount) {
 		// Down
 		if(direction == 1) {
@@ -251,6 +256,20 @@ public class DrawingShape implements DrawingComposite {
 			y1 += amount/2;
 		}
 	}
+
+
+	@Override
+	public DrawingShape getLeafMatchingCoords(int x1, int y1) {
+		// Do nothing
+		return null;
+	}
+
+	public void delegateSettingToLeaf(shapeSettings setting) {
+			// do nothing here
+	}
+
+
+
 
 
 	
