@@ -10,24 +10,26 @@ public class Controller {
 
 	public void handleEvent(String event) {
 		
-			//System.out.println("HandleEvent: "+event);
+			System.out.println("HandleEvent: "+event);
 			
 		switch(event) {
-		// TestCase
-		case "1": System.out.println("c: TestCase 1"); 
-						v.drawResult(m.exampleTest(v.getDrawUtil()));
+		// EmptyPanel
+		case "clearPanel": System.out.println("Clear panel");   
+							m.emptyContainer();
+							v.drawResult(m.getCurrentDC());
+							v.repaintView();
 			break;
 		// Save
-		case "2": System.out.println("c: Save 2");  
+		case "save": System.out.println("c: Save");  
 						m.writeObjectToFile();			
 			break;
 		// Open
-		case "3": System.out.println("c: Open 3"); 
+		case "open": System.out.println("c: Open"); 
 						v.drawResult(m.readObjectFromFile());
 			break;
 		// Create Line
 		case "Line": System.out.println("c: Line");
-						m.addLeafToComposite(m.createLine(v.getDrawUtil(),37,250,50,50,7,Color.RED));
+						m.addLeafToComposite(m.createLine(v.getDrawUtil(),10,100,100,100,10,Color.RED));
 						v.drawResult(m.getCurrentDC());
 			break;
 		// Create Rect
@@ -41,20 +43,35 @@ public class Controller {
 					 	v.drawResult(m.getCurrentDC());
 			break;
 			
-		case "LineColor": // Set line color on selShape! Temporary
-						m.changeShapeLineColor(v.getSelectedShape(), v.showColorPicker());
+		case "LineColor": 
+						m.changeShapeLineColor(m.getLeafAtCoords(v.getSelectedShapeCoords("x"), v.getSelectedShapeCoords("y")), v.showColorPicker());
 						v.repaintView();
 						
 			break;
-		case "AreaColor": // Set Area color on selShape!
-						m.changeShapeAreaColor(v.getSelectedShape(), v.showColorPicker());
+		case "AreaColor":
+						m.changeShapeAreaColor(m.getLeafAtCoords(v.getSelectedShapeCoords("x"), v.getSelectedShapeCoords("y")), v.showColorPicker());
 						v.repaintView();
 			break;
 			
-		case "ConfirmChanges": // Chain ska startas här med input från view -> ArrayList<String> Commands
+		case "ConfirmChanges": 
 						m.startEditChain(v.constructShapeSettings());
 						v.repaintView();
 			break;
+			
+		case"getShapeAtCoords":
+						v.updateEditPanelSettings(v.getShapeAtCoords(m.getLeafAtCoords(v.getMouseCoords("x"), v.getMouseCoords("y"))));				
+			break;
+			
+		case "scaleShape": // updates EditGUIPanel attributes to the current selected shape!
+						v.updateEditPanelSettings(m.scaleShape(v.getShapeAtCoords(m.getLeafAtCoords(v.getSelectedShapeCoords("x"), v.getSelectedShapeCoords("y"))), v.getScrollAmount(), v.getScrollDirection()));
+						v.repaintView();
+			break;
+		case "removeShape": // updates EditGUIPanel attributes to the current selected shape!
+							System.out.println("removeShape");
+							m.removeLeaf(v.getShapeAtCoords(m.getLeafAtCoords(v.getSelectedShapeCoords("x"), v.getSelectedShapeCoords("y"))));
+							v.repaintView();
+		break;
+		
 		}
 	}
 	

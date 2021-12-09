@@ -11,12 +11,10 @@ import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 public class Circle extends DrawingShape {
 	
-	//private HelpRect helpRect;
 	private String type = "Circle";
 	
 	public void draw(Graphics g) {
 		di.drawCircle(this,g);
-		//di.drawRect(helpRect, g);
 	}
 
 	
@@ -30,17 +28,16 @@ public class Circle extends DrawingShape {
 		setLineColor(lineColor);
 		setAreaColor(area);
 		setType("Circle");
-		//setHelpRect(this.helpRect = new HelpRect(di, x1, y1, w, h));
 		}
 	
 	@Override
 	public DrawingShape getLeafMatchingCoords(int x1, int y1) {
 		int checker= 0;
 		
-		if(x1 >= this.x1 && x1 <= width + this.x1) {
+		if(x1 >= this.x1 - lineWidth/2  && x1  <= this.x1 + width  + lineWidth/2) {
 			checker++;
 		}
-		if(y1 >= this.y1 && y1 <= height + this.y1) {
+		if(y1  >= this.y1 - lineWidth/2 && y1  <= this.y1 + height + lineWidth/2) {
 			checker++;
 		}
 		if(checker == 2) {

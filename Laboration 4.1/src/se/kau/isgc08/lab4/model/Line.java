@@ -11,36 +11,35 @@ import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 
 public class Line extends DrawingShape {
-	//private HelpRect helpRect;
 	public void draw(Graphics g) {
 		di.drawLine(this, g);
-		//di.drawRect(helpRect, g);
 	}
 	
-	public Line(DrawingUtilInterface di, int x1, int y1, int width, int height, int lineWidth, Color color) {
+	public Line(DrawingUtilInterface di, int x1, int y1, int x2, int y2, int lineWidth, Color color) {
 		super(di);
 		setX1(x1);
-		setWidth(width);
+		setWidth(x2);
 		setY1(y1);
-		setHeight(height);
+		setHeight(y2);
 		setLineWidth(lineWidth);
 		setLineColor(color);
 		setAreaColor(Color.BLACK);
 		setType("Line");
-		//setHelpRect(this.helpRect = new HelpRect(di,y1,x1,width,y2));
 	}
 	
 	@Override
 	public DrawingShape getLeafMatchingCoords(int x1, int y1) {
-		int checker= 0;
 		
-		if(x1 >= this.x1 && x1 <= width + this.x1) {
-			checker++;
+		if(x1 >= this.x1 - lineWidth/2 && y1  <= this.y1 + lineWidth/2) {
+			System.out.println("x1y1 in");
+			int x11 = this.x1 - lineWidth;
+			int y11 = this.y1 + lineWidth;
+			
+			System.out.println("leftB: "+x11+" rightB: "+y11);
+			return this;
 		}
-		if(y1 >= this.y1 && y1 <= height + this.y1) {
-			checker++;
-		}
-		if(checker == 2) {
+		if(x1  >= width - lineWidth/2 && y1  <= height + lineWidth/2) {
+			System.out.println("hw in");
 			return this;
 		}
 		return null;
@@ -51,6 +50,18 @@ public class Line extends DrawingShape {
 			this.height = setting.getHeight();
 			this.lineWidth = setting.getLineWidth();
 		}
+	}
+	public void scale(int direction, int amount) {
+		if(direction == 1) {
+			this.lineWidth += amount;
+		}
+		if(direction == -1) {
+			if(lineWidth > minimumScale) {
+				this.lineWidth -= amount;
+			}
+			
+		}
+
 	}
 	
 

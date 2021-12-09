@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,7 +17,11 @@ import se.kau.isgc08.lab4.model.DrawingShape;
 import se.kau.isgc08.lab4.view.DrawingPanel;
 import se.kau.isgc08.lab4.view.DrawingUtil;
 
-public class View extends JFrame implements ActionListener {
+public class View extends JFrame implements ActionListener, KeyListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -932726630757368132L;
 	private Controller c;
 	private DrawingUtil DU;
 	private JPanel mainPanel;
@@ -33,6 +39,7 @@ public class View extends JFrame implements ActionListener {
 		// initMenuBar();
 		
 		// Handle mouse events!
+		addKeyListener(this);
 		MouseHandler = new MouseEventHandler(DrawPanel, this);
 		
 		colorPickerHandler = new colorPickerHandler(this);
@@ -78,19 +85,24 @@ public class View extends JFrame implements ActionListener {
 		CircleBtn.setActionCommand("Circle");
 		btnPanelNorth.add(CircleBtn);
 		
-		JButton test1Btn = new JButton("Test 1");
+		JButton RemoveBtn = new JButton("Remove");
+		RemoveBtn.addActionListener(this);
+		RemoveBtn.setActionCommand("removeShape");
+		btnPanelNorth.add(RemoveBtn);
+		
+		JButton test1Btn = new JButton("Clear Panel");
 		test1Btn.addActionListener(this);
-		test1Btn.setActionCommand("1");
+		test1Btn.setActionCommand("clearPanel");
 		btnPanelSouth.add(test1Btn);
 		
 		JButton saveBtn= new JButton("Save");
 		saveBtn.addActionListener(this);
-		saveBtn.setActionCommand("2");
+		saveBtn.setActionCommand("save");
 		btnPanelSouth.add(saveBtn);
 		
 		JButton openBtn= new JButton("Open");
 		openBtn.addActionListener(this);
-		openBtn.setActionCommand("3");
+		openBtn.setActionCommand("open");
 		btnPanelSouth.add(openBtn);
 		
 		mainPanel.add(btnPanelNorth, BorderLayout.NORTH);
@@ -106,9 +118,7 @@ public class View extends JFrame implements ActionListener {
 	}
 	
 	public void drawResult(DrawingContainer DC) {
-		MouseHandler.setShapeCont(DC);
 		DrawPanel.setDc(DC);
-		//MouseHandler.addObjectsMouseListenerList(DC);
 		this.repaint();
 	}
 
@@ -130,33 +140,85 @@ public class View extends JFrame implements ActionListener {
 	public Color showColorPicker() {
 		return colorPickerHandler.showColorPicker();
 	}
-	// Inte använd!
-	/*public int getSelectedShapeIndex() {
-		int slask = MouseHandler.getSelectedShapeByIndex();
-		return slask;
-		
-	}
-	*/
-	public DrawingShape getSelectedShape() {
-		return MouseHandler.getSelectedShape();
-		
-	}
 	
-	public void updateEditPanelSettings() {
+	public void updateEditPanelSettings(DrawingShape shape) {
 		//TODO; Uppdatera editGuiPanels settings till den nuvarande selected Shape!
+		// Sker efter Shape är selected
+		if(shape != null) {
+			editGUIPanel.setWidthFieldText(shape.getWidth());
+			editGUIPanel.setHeightField(shape.getHeight());
+			editGUIPanel.setLineWidthField(shape.getLineWidth());
+			editGUIPanel.setButtonAreaColor(shape.getAreaColor());
+			editGUIPanel.setButtonLineColor(shape.getLineColor());
+		}
+		
+	}
+	public void triggerGetShapeAtCoords() {
+		c.handleEvent("getShapeAtCoords");
+	}
+	public void triggerScaleShape() {
+		c.handleEvent("scaleShape");
+	}
+	public int getScrollDirection() {
+		return MouseHandler.getScrollDirection();
+	}
+	public int getScrollAmount() {
+		return MouseHandler.getScrollAmount();
+	}
+	public DrawingShape getShapeAtCoords(DrawingShape shape) {
+		MouseHandler.receiveShape(shape);
+		return shape;
+	}
+	public int getMouseCoords(String code) {
+		if(code == "x") {
+			return MouseHandler.getMouseX();
+		}
+		if(code == "y") {
+			return MouseHandler.getMouseY();
+		}
+		return -1;
+	}
+	public int getSelectedShapeCoords(String code) {
+		if(code == "x") {
+			return MouseHandler.getSelectedShapeX();
+		}
+		if(code == "y") {
+			return MouseHandler.getSelectedShapeY();
+		}
+		return -1;
 	}
 	public void repaintView() {
 		this.repaint();
 	}
 	public shapeSettings constructShapeSettings() {
-		int x1 = MouseHandler.getSelectedShape().getX1();
-		int y1 = MouseHandler.getSelectedShape().getY1();
+		int x1 = MouseHandler.getSelectedShapeX();
+		int y1 = MouseHandler.getSelectedShapeY();
 		int width = editGUIPanel.getWidthFieldText();
 		int height = editGUIPanel.getHeightFieldText();
 		int lineWidth = editGUIPanel.getLineWidthFieldText();
 		shapeSettings setting = new shapeSettings(x1,y1,width, height, lineWidth);
 		
 		return setting;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("keyTyped");
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("keyTyped");
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("keyTyped");	
 	}
 
 }

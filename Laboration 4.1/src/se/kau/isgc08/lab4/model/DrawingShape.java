@@ -20,11 +20,11 @@ public class DrawingShape implements DrawingComposite {
 	
 	/** The di. */
 	DrawingUtilInterface di;
-	// HelpRectangle
-	//HelpRect helpRect;
+
 	// Type
 	String type;
-
+	// Minimum scale value
+	int minimumScale = 8;
 	/** The width. */
 	int width;
 	
@@ -207,56 +207,24 @@ public class DrawingShape implements DrawingComposite {
 	public String getType() {
 		return type;
 	}
-	/*public HelpRect getHelpRect() {
-		return helpRect;
-	}
-
-	public void setHelpRect(HelpRect helpRect) {
-		this.helpRect = helpRect;
-	}
-	*/
-	/*public void enableHelpRect(Boolean enable) {
-		if(enable == true) {
-			helpRect.setLineColor(new Color(0.2f,0f,0f,1f));
-		}
-		if(enable == false) {
-			helpRect.setLineColor(new Color(0f,0f,0f,0f));
-		}
-	}
-	*/
-	// TA BORT
-	/*public boolean contains(int x, int y) {
-		int temp = 0;
-		if(x >= x1 && x <= width + x1) {
-			temp++;
-		}
-		if(y >= y1 && y <= height + y1) {
-			temp++;
-		}
-		if(temp == 2) {
-			return true;
-		}
-		return false;
-	}
-	*/
 	
 	public void scale(int direction, int amount) {
-		// Down
 		if(direction == 1) {
 			width+=amount;
 			height+=amount;
 			x1 -= amount/2;
 			y1 -= amount/2;
+			
 		}
-		// Up
 		if(direction == -1) {
+			if(width > minimumScale || height > minimumScale){
 			width-=amount;
 			height-=amount;
 			x1 += amount/2;
 			y1 += amount/2;
+			}
 		}
 	}
-
 
 	@Override
 	public DrawingShape getLeafMatchingCoords(int x1, int y1) {
@@ -265,7 +233,7 @@ public class DrawingShape implements DrawingComposite {
 	}
 
 	public void delegateSettingToLeaf(shapeSettings setting) {
-			// do nothing here
+		// do nothing here
 	}
 
 

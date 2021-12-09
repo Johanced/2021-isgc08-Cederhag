@@ -15,8 +15,12 @@ public class EditGUIPanel extends JPanel {
 	private JTextField widthField;
 	private JTextField heightField;
 	private JTextField lineWidthField;
+	private JButton lineColorBtn;
+	private JButton areaColorBtn;
 
 	public EditGUIPanel(JButton editConfirmBtn, JButton chooseLineColorBtn, JButton chooseAreaColorBtn) {
+		lineColorBtn = chooseLineColorBtn;
+		areaColorBtn = chooseAreaColorBtn;
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JLabel titleLabel = new JLabel("Edit shape");
@@ -71,8 +75,8 @@ public class EditGUIPanel extends JPanel {
 		
 	}
 
-	public void setWidthField(JTextField widthField) {
-		this.widthField = widthField;
+	public void setWidthFieldText(int width) {
+		this.widthField.setText(String.valueOf(width));
 	}
 
 	public int getHeightFieldText() {
@@ -87,8 +91,8 @@ public class EditGUIPanel extends JPanel {
 		
 	}
 
-	public void setHeightField(JTextField heightField) {
-		this.heightField = heightField;
+	public void setHeightField(int height) {
+		this.heightField.setText(String.valueOf(height));
 	}
 
 	public int getLineWidthFieldText() {
@@ -103,8 +107,15 @@ public class EditGUIPanel extends JPanel {
 		
 	}
 
-	public void setLineWidthField(JTextField lineWidthField) {
-		this.lineWidthField = lineWidthField;
+	public void setLineWidthField(int lineWidth) {
+		this.lineWidthField.setText(String.valueOf(lineWidth));
+	}
+	
+	public void setButtonAreaColor(Color color) {
+		areaColorBtn.setForeground(color);
+	}
+	public void setButtonLineColor(Color color) {
+		lineColorBtn.setForeground(color);
 	}
 
 }

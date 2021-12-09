@@ -25,27 +25,12 @@ public class Model {
 	public Model() {
 		currentDC = new DrawingContainer();
 		
-		// Not implemented
-		//AbstractHandler BossHandler;
-		//CoordinatesHandler coordHandler = new CoordinatesHandler();
 	}
-	// EXAMPLE
-	public DrawingContainer exampleTest(DrawingUtil da) {
-		DrawingContainer container = new DrawingContainer();
-		Line l=new Line(da,50,3,75,50,1,Color.RED);
-		container.add(l);
-		currentDC = container;
-		
-		return container;
+	
+	public void emptyContainer() {
+		currentDC = new DrawingContainer();
 	}
-	/*public DrawingShape getSpecificShape(int index) {
-		Vector<DrawingComposite> temp = currentDC.getVector();
-		DrawingShape selectedShape = (DrawingShape) temp.get(index);
-		System.out.println("model: Shape selected by index : "+selectedShape.getLineColor());
-		
-		return selectedShape;
-	}
-	*/
+
 	public void addLeafToComposite(DrawingShape shape) {
 		currentDC.add(shape);
 	}
@@ -53,14 +38,25 @@ public class Model {
 		currentDC.remove(shape);
 	}
 	public void startEditChain(shapeSettings setting) {
-		//TODO; Edit shape -> Sker i chain -> color, linecolor, areaColor, width, height, 
 		currentDC.delegateSettingToLeaf(setting);
 	}
+	public DrawingShape getLeafAtCoords(int x1, int y1) {
+		return currentDC.getLeafMatchingCoords(x1, y1);
+		
+	}
 	public void changeShapeLineColor(DrawingShape slaskShape, Color pickedColor) {
-		slaskShape.setLineColor(pickedColor);
+		if(slaskShape != null) {
+			slaskShape.setLineColor(pickedColor);
+		}	
 	}
 	public void changeShapeAreaColor(DrawingShape slaskShape, Color pickedColor) {
-		slaskShape.setAreaColor(pickedColor);
+		if(slaskShape != null) {
+			slaskShape.setAreaColor(pickedColor);
+		}	
+	}
+	public DrawingShape scaleShape(DrawingShape slaskShape, int amount, int direction) {
+		slaskShape.scale(direction, amount);
+		return slaskShape;
 	}
 	public void writeObjectToFile() {
 		try {
@@ -104,11 +100,7 @@ public class Model {
 		
 		return new Rect(DU, x1, y1, x2, y2, width, color, area);
 	}
-	/*public HelpRect createHelpRect(int x1, int y1, int width, int height) {
-		
-		return new HelpRect(da, x1, y1, width, height);	
-	}
-	*/
+
 	public void setCurrentDC(DrawingContainer d) {
 		currentDC = d;
 	}

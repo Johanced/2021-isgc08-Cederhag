@@ -13,10 +13,8 @@ public class Rect extends DrawingShape {
 
 	private String type = "Rect";
 	private int uniqueID;
-	//private HelpRect helpRect;
 	public void draw(Graphics g) {
 		di.drawRect(this, g);
-		//di.drawRect(helpRect, g);
 	}
 	
 	public Rect(DrawingUtilInterface di, int x1, int y1, int w, int h, int width, Color lineColor, Color area) {
@@ -29,16 +27,15 @@ public class Rect extends DrawingShape {
 		setLineColor(lineColor);
 		setAreaColor(area);
 		setType("Rect");
-		//setHelpRect(this.helpRect = new HelpRect(di, x1, y1, w, h));
 	}
 	@Override
 	public DrawingShape getLeafMatchingCoords(int x1, int y1) {
 		int checker= 0;
 		
-		if(x1 >= this.x1 && x1 <= width + this.x1) {
+		if(x1 >= this.x1 - lineWidth/2  && x1  <= this.x1 + width  + lineWidth/2) {
 			checker++;
 		}
-		if(y1 >= this.y1 && y1 <= height + this.y1) {
+		if(y1  >= this.y1 - lineWidth/2 && y1  <= this.y1 + height + lineWidth/2) {
 			checker++;
 		}
 		if(checker == 2) {
