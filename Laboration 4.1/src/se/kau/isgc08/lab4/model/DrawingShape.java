@@ -6,7 +6,6 @@ import java.util.Enumeration;
 
 import javax.swing.JComponent;
 
-import ChainOfR.shapeSettings;
 import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 
@@ -23,8 +22,10 @@ public class DrawingShape implements DrawingComposite {
 
 	// Type
 	String type;
+	
+	String pointType;
 	// Minimum scale value
-	int minimumScale = 8;
+	int minimumScale = 3;
 	/** The width. */
 	int width;
 	
@@ -133,7 +134,7 @@ public class DrawingShape implements DrawingComposite {
 	 * @param w the new line width needs to be an even number to make shapefills right.
 	 */
 	public void setLineWidth(int w) {
-		lineWidth=w;
+		lineWidth=w;	
 	}
 
 	/* (non-Javadoc)
@@ -217,11 +218,20 @@ public class DrawingShape implements DrawingComposite {
 			
 		}
 		if(direction == -1) {
-			if(width > minimumScale || height > minimumScale){
-			width-=amount;
-			height-=amount;
-			x1 += amount/2;
-			y1 += amount/2;
+			int temp = 0;	
+			if(width < 5) {
+				width = 5;
+				temp++;
+			}
+			if(height < 5) {
+				height = 5;
+				temp++;
+			}
+			if(temp < 1) {
+				width-=amount;
+				height-=amount;
+				x1 += amount/2;
+				y1 += amount/2;	
 			}
 		}
 	}
@@ -234,6 +244,20 @@ public class DrawingShape implements DrawingComposite {
 
 	public void delegateSettingToLeaf(shapeSettings setting) {
 		// do nothing here
+	}
+	public void move(int x1, int y2, int newX2, int newY2, String type) {
+		System.out.println("DrawingShape move executing...");
+		this.setX1(x1);
+		this.setY1(y2);
+	}
+
+	public String getPointType() {
+		return pointType;
+	}
+
+
+	public void setPointType(String pointType) {
+		this.pointType = pointType;
 	}
 
 

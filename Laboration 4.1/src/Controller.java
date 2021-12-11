@@ -10,7 +10,7 @@ public class Controller {
 
 	public void handleEvent(String event) {
 		
-			System.out.println("HandleEvent: "+event);
+			//System.out.println("HandleEvent: "+event);
 			
 		switch(event) {
 		// EmptyPanel
@@ -29,17 +29,17 @@ public class Controller {
 			break;
 		// Create Line
 		case "Line": System.out.println("c: Line");
-						m.addLeafToComposite(m.createLine(v.getDrawUtil(),10,100,100,100,10,Color.RED));
+						m.addLeafToComposite(m.createLine(v.getDrawUtil(),10,300,100,300,10,Color.GRAY));
 						v.drawResult(m.getCurrentDC());
 			break;
 		// Create Rect
 		case "Rect": System.out.println("c: Rect"); 
-						m.addLeafToComposite(m.createRect(v.getDrawUtil(),125,250,50,50,10,Color.RED, Color.BLUE));
+						m.addLeafToComposite(m.createRect(v.getDrawUtil(),125,250,50,50,10,Color.GRAY, Color.BLACK));
 						v.drawResult(m.getCurrentDC());
 			break;
 		// Create Circle
 		case "Circle": System.out.println("c: Circle"); 
-					 	m.addLeafToComposite(m.createCircle(v.getDrawUtil(),225,250,50,50,4,Color.YELLOW, Color.BLACK));
+					 	m.addLeafToComposite(m.createCircle(v.getDrawUtil(),225,250,50,50,4,Color.GRAY, Color.BLACK));
 					 	v.drawResult(m.getCurrentDC());
 			break;
 			
@@ -54,7 +54,11 @@ public class Controller {
 			break;
 			
 		case "ConfirmChanges": 
-						m.startEditChain(v.constructShapeSettings());
+						Boolean didItWork = m.startEditChain(v.constructShapeSettings());
+						if(didItWork == false) {
+							// Error dialog
+							v.showDialog("Shape can't have negative space.", "Error", "Error");
+						}
 						v.repaintView();
 			break;
 			
@@ -67,9 +71,8 @@ public class Controller {
 						v.repaintView();
 			break;
 		case "removeShape": // updates EditGUIPanel attributes to the current selected shape!
-							System.out.println("removeShape");
-							m.removeLeaf(v.getShapeAtCoords(m.getLeafAtCoords(v.getSelectedShapeCoords("x"), v.getSelectedShapeCoords("y"))));
-							v.repaintView();
+						m.removeLeaf(v.getShapeAtCoords(m.getLeafAtCoords(v.getSelectedShapeCoords("x"), v.getSelectedShapeCoords("y"))));
+						v.repaintView();
 		break;
 		
 		}

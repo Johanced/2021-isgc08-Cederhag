@@ -4,7 +4,6 @@ package se.kau.isgc08.lab4.model;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import ChainOfR.shapeSettings;
 import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 

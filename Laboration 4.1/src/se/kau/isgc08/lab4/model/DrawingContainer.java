@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import ChainOfR.shapeSettings;
 import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 
@@ -183,6 +182,22 @@ public class DrawingContainer implements DrawingComposite, Cloneable {
 		}
 	}
 
+	@Override
+	public void move(int x1, int y1, int x2, int y2, String type) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setType(String type) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

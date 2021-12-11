@@ -1,4 +1,5 @@
-package ChainOfR;
+package se.kau.isgc08.lab4.model;
+
 import java.awt.Color;
 
 public class shapeSettings {

@@ -67,7 +67,7 @@ public class EditGUIPanel extends JPanel {
 		try {
 			
 			int width = Integer.parseInt(widthField.getText());
-			return width;
+				return width;
 		}catch(NumberFormatException e) {
 			System.out.println("EditGUIPanel: "+e);
 		}

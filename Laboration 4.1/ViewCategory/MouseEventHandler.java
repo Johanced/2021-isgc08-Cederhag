@@ -7,6 +7,7 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 	private DrawingShape selShape;
 	private View view;
 	private Point offset;
+	private Point lineX2Y2Offset;
 	private Point mouseCoords;
 	private DrawingPanel DrawPanel;
 	private int scrollDirection;
@@ -18,16 +19,9 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 		this.DrawPanel.addMouseListener(this);
 		this.DrawPanel.addMouseMotionListener(this); 
 		this.DrawPanel.addMouseWheelListener(this);
-		/*view.addKeyListener(new KeyAdapter() {
-			 public void keyTyped(KeyEvent e) {
-			        System.out.println("keyTyped: '" + e.getKeyChar() + "'");
-			      }
-		});
-		*/
 		
 	}
 	
-	// Rätt värdelös med att registrera klick!!
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -45,6 +39,7 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 		view.triggerGetShapeAtCoords();
 		if(selShape != null) {
 			offset = new Point(e.getPoint().x - selShape.getX1(),e.getPoint().y - selShape.getY1());
+			lineX2Y2Offset = new Point(e.getPoint().x - selShape.getWidth(), e.getPoint().y - selShape.getHeight());
 		}	
 	}
 
@@ -110,43 +105,17 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if(selShape != null && selShape.getType() != "Line") {
-			if(offset != null) {
-				int newX = e.getPoint().x - offset.x;
-				int newY = e.getPoint().y - offset.y;
-				selShape.setX1(newX);
-				selShape.setY1(newY);
-				view.repaint();
-			}
-			
-		}
-		if(selShape != null && selShape.getType() == "Line") {
-			if(offset != null) {
-				int newX = e.getPoint().x - offset.x;
-				int newY = e.getPoint().y - offset.y;
-
-				Point mouseP = new Point(e.getX(), e.getY());
-				
-				Point PointX1Y1 = new Point(selShape.getX1(), selShape.getY1());
-				Point PointWH = new Point(selShape.getWidth(), selShape.getHeight());
-
-				double whDist = PointWH.distance(mouseP);
-				System.out.println("wh = "+whDist);
-				double x1y1Dist = PointX1Y1.distance(mouseP);
-				System.out.println("x1y1 = "+x1y1Dist);
-				
-				if(x1y1Dist < whDist) {
-					selShape.setX1(e.getX());
-					selShape.setY1(e.getY());
-				}else if(whDist < x1y1Dist) {	
-					selShape.setWidth(e.getX());
-					selShape.setHeight(e.getY());
-				}
-				
-				view.repaint();
-			}
-		}
 		
+		if(selShape != null) {
+			if(offset != null) {
+				int newX1 = e.getPoint().x - offset.x;
+				int newY1 = e.getPoint().y - offset.y;
+				int newX2 = e.getPoint().x - lineX2Y2Offset.x;
+				int newY2 = e.getPoint().y - lineX2Y2Offset.y;
+				selShape.move(newX1,newY1,newX2,newY2, selShape.getPointType());
+				view.repaint();
+			}	
+		}	
 	}
 
 	public int getScrollDirection() {
@@ -156,27 +125,5 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 	public int getScrollAmount() {
 		return scrollAmount;
 	}
-
-	/*//TODO; Addera Delete-funktion med Knapp tryck!!
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		char c = e.getKeyChar();
-		System.out.println("key Pressed: "+c);
-	}
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		char c = e.getKeyChar();
-		System.out.println("key Pressed: "+c);
-	}
-	@Override
-	public void keyReleased(KeyEvent key) {
-		// TODO Auto-generated method stub
-		char c = key.getKeyChar();
-		System.out.println("key Pressed: "+c);
-		
-	}
-	*/
 
 }

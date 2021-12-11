@@ -1,22 +1,16 @@
 import java.awt.Color;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Vector;
-
-import ChainOfR.AbstractHandler;
-import ChainOfR.CoordinatesHandler;
-import ChainOfR.shapeSettings;
 import se.kau.isgc08.lab4.model.Circle;
 import se.kau.isgc08.lab4.model.DrawingComposite;
 import se.kau.isgc08.lab4.model.DrawingContainer;
 import se.kau.isgc08.lab4.model.DrawingShape;
 import se.kau.isgc08.lab4.model.Line;
 import se.kau.isgc08.lab4.model.Rect;
+import se.kau.isgc08.lab4.model.shapeSettings;
 import se.kau.isgc08.lab4.view.DrawingUtil;
 
 public class Model {
@@ -35,10 +29,16 @@ public class Model {
 		currentDC.add(shape);
 	}
 	public void removeLeaf(DrawingShape shape) {
+		if(shape != null) {
 		currentDC.remove(shape);
+		}
 	}
-	public void startEditChain(shapeSettings setting) {
+	public boolean startEditChain(shapeSettings setting) {
+		if(setting != null) {
 		currentDC.delegateSettingToLeaf(setting);
+		return true;
+		}
+		return false;
 	}
 	public DrawingShape getLeafAtCoords(int x1, int y1) {
 		return currentDC.getLeafMatchingCoords(x1, y1);
@@ -55,7 +55,9 @@ public class Model {
 		}	
 	}
 	public DrawingShape scaleShape(DrawingShape slaskShape, int amount, int direction) {
-		slaskShape.scale(direction, amount);
+		if(slaskShape != null ) {
+			slaskShape.scale(direction, amount);
+		}
 		return slaskShape;
 	}
 	public void writeObjectToFile() {
@@ -77,6 +79,9 @@ public class Model {
 			fi = new FileInputStream("test1.dat");
 			ObjectInputStream oi = new ObjectInputStream(fi);
 			currentDC = (DrawingContainer) oi.readObject();
+			for(DrawingComposite shape : currentDC.getVector()) {
+				System.out.println("loaded shape: "+shape.getType());
+			}
 		} catch (IOException e) {
 			System.out.println("Model: readObject : Error, IO error");
 			e.printStackTrace();

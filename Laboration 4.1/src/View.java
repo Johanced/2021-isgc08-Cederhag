@@ -9,15 +9,16 @@ import java.awt.event.KeyListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import ChainOfR.shapeSettings;
 import se.kau.isgc08.lab4.model.DrawingContainer;
 import se.kau.isgc08.lab4.model.DrawingShape;
+import se.kau.isgc08.lab4.model.shapeSettings;
 import se.kau.isgc08.lab4.view.DrawingPanel;
 import se.kau.isgc08.lab4.view.DrawingUtil;
 
-public class View extends JFrame implements ActionListener, KeyListener {
+public class View extends JFrame implements ActionListener {
 	/**
 	 * 
 	 */
@@ -39,7 +40,6 @@ public class View extends JFrame implements ActionListener, KeyListener {
 		// initMenuBar();
 		
 		// Handle mouse events!
-		addKeyListener(this);
 		MouseHandler = new MouseEventHandler(DrawPanel, this);
 		
 		colorPickerHandler = new colorPickerHandler(this);
@@ -190,35 +190,26 @@ public class View extends JFrame implements ActionListener, KeyListener {
 	public void repaintView() {
 		this.repaint();
 	}
+	public void showDialog(String message, String title, String type) {
+		if(type == "Error") {
+			JOptionPane.showMessageDialog(this, message, title, JOptionPane.WARNING_MESSAGE);
+		}
+		
+	}
 	public shapeSettings constructShapeSettings() {
 		int x1 = MouseHandler.getSelectedShapeX();
 		int y1 = MouseHandler.getSelectedShapeY();
 		int width = editGUIPanel.getWidthFieldText();
 		int height = editGUIPanel.getHeightFieldText();
 		int lineWidth = editGUIPanel.getLineWidthFieldText();
-		shapeSettings setting = new shapeSettings(x1,y1,width, height, lineWidth);
-		
+		if(width < 1 || height < 1 || lineWidth < 1) {
+			System.out.println("null settings returned");
+			return null;
+		}else {
+			shapeSettings setting = new shapeSettings(x1,y1,width, height, lineWidth);
+			
 		return setting;
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("keyTyped");
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("keyTyped");
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("keyTyped");	
+		}
 	}
 
 }

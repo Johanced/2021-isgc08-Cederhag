@@ -3,7 +3,6 @@ package se.kau.isgc08.lab4.model;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import ChainOfR.shapeSettings;
 import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 
@@ -12,7 +11,6 @@ import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 public class Rect extends DrawingShape {
 
 	private String type = "Rect";
-	private int uniqueID;
 	public void draw(Graphics g) {
 		di.drawRect(this, g);
 	}
@@ -50,6 +48,10 @@ public class Rect extends DrawingShape {
 			this.height = setting.getHeight();
 			this.lineWidth = setting.getLineWidth();
 		}
+	}
+	public void move(int x1, int y1) {
+		this.setX1(x1);
+		this.setY1(y1);
 	}
 
 }

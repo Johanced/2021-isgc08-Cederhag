@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.io.Serializable;
 
-import ChainOfR.shapeSettings;
 import se.kau.isgc08.lab4.view.DrawingUtilInterface;
 
 
@@ -93,9 +92,12 @@ public interface DrawingComposite extends Serializable {
     */
    public Color getAreaColor();
    
-   
-   
+   public String getType();
+   public void setType(String type);
+
    public DrawingShape getLeafMatchingCoords(int x1, int y1);
 
    public void delegateSettingToLeaf(shapeSettings setting);
+   
+   public void move(int x1, int y1, int x2, int y2, String type);
 }

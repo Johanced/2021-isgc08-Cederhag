@@ -11,11 +11,11 @@ public class MinimalDraw {
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		DrawingContainer dc=new DrawingContainer(); 
 		DrawingUtil da=new DrawingUtil();	
-		Line l=new Line(da,3,3,50,50,1,Color.RED);  											
+		//Line l=new Line(da,3,3,50,50,1,Color.RED);  											
 		Circle c=new Circle(da,20,20,80,80,1,Color.BLUE,null);
 		Circle c2=new Circle(da,150,150,50,250,20,Color.BLUE, Color.CYAN); 
 		Rect r=new Rect(da,320,200,80,80,5,Color.GREEN,Color.PINK); 
-		dc.add(l);   
+		//dc.add(l);   
 		dc.add(c);
 		dc.add(c2);
 		dc.add(r);
