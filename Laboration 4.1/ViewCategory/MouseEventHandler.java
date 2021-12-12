@@ -8,6 +8,10 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 	private View view;
 	private Point offset;
 	private Point lineX2Y2Offset;
+	private int offsetNewX1;
+	private int offsetNewY1;
+	private int lineOffsetX2;
+	private int lineOffsetY2;
 	private Point mouseCoords;
 	private DrawingPanel DrawPanel;
 	private int scrollDirection;
@@ -73,18 +77,6 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		// TODO Auto-generated method stub
 		 if (e.getWheelRotation() < 0) {
@@ -108,12 +100,13 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 		
 		if(selShape != null) {
 			if(offset != null) {
-				int newX1 = e.getPoint().x - offset.x;
-				int newY1 = e.getPoint().y - offset.y;
-				int newX2 = e.getPoint().x - lineX2Y2Offset.x;
-				int newY2 = e.getPoint().y - lineX2Y2Offset.y;
-				selShape.move(newX1,newY1,newX2,newY2, selShape.getPointType());
-				view.repaint();
+				offsetNewX1 = e.getPoint().x - offset.x;
+				offsetNewY1 = e.getPoint().y - offset.y;
+				lineOffsetX2 = e.getPoint().x - lineX2Y2Offset.x;
+				lineOffsetY2 = e.getPoint().y - lineX2Y2Offset.y;
+				//view.moveThisShape();
+				selShape.move(offsetNewX1,offsetNewY1,lineOffsetX2,lineOffsetY2, selShape.getPointType());
+				view.repaintView();
 			}	
 		}	
 	}
@@ -124,6 +117,53 @@ public class MouseEventHandler implements MouseListener, MouseMotionListener, Mo
 
 	public int getScrollAmount() {
 		return scrollAmount;
+	}
+
+	public int getOffsetNewX1() {
+		return offsetNewX1;
+	}
+
+	public void setOffsetNewX1(int offsetNewX1) {
+		this.offsetNewX1 = offsetNewX1;
+	}
+
+	public int getOffsetNewY1() {
+		return offsetNewY1;
+	}
+
+	public void setOffsetNewY1(int offsetNewY1) {
+		this.offsetNewY1 = offsetNewY1;
+	}
+
+	public int getLineOffsetX2() {
+		return lineOffsetX2;
+	}
+
+	public void setLineOffsetX2(int lineOffsetX2) {
+		this.lineOffsetX2 = lineOffsetX2;
+	}
+
+	public int getLineOffsetY2() {
+		return lineOffsetY2;
+	}
+
+	public void setLineOffsetY2(int lineOffsetY2) {
+		this.lineOffsetY2 = lineOffsetY2;
+	}
+	public String getPointType() {
+		return selShape.getPointType();
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

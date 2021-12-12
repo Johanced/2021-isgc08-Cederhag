@@ -246,7 +246,6 @@ public class DrawingShape implements DrawingComposite {
 		// do nothing here
 	}
 	public void move(int x1, int y2, int newX2, int newY2, String type) {
-		System.out.println("DrawingShape move executing...");
 		this.setX1(x1);
 		this.setY1(y2);
 	}

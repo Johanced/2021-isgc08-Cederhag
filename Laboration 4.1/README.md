@@ -1,6 +1,4 @@
-# **Laboration 4.1**
-
-
+# **Laboration 4 , del 1 & del 2**
 
 ## Class diagram
 

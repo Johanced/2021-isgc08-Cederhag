@@ -70,11 +70,16 @@ public class Controller {
 						v.updateEditPanelSettings(m.scaleShape(v.getShapeAtCoords(m.getLeafAtCoords(v.getSelectedShapeCoords("x"), v.getSelectedShapeCoords("y"))), v.getScrollAmount(), v.getScrollDirection()));
 						v.repaintView();
 			break;
-		case "removeShape": // updates EditGUIPanel attributes to the current selected shape!
+		case "removeShape":
 						m.removeLeaf(v.getShapeAtCoords(m.getLeafAtCoords(v.getSelectedShapeCoords("x"), v.getSelectedShapeCoords("y"))));
 						v.repaintView();
-		break;
-		
+			break;
+			
+		/*case "moveShape":
+						m.moveShape(m.getLeafAtCoords(v.getMouseCoords("x"), v.getMouseCoords("y")), v.mouseHandlerGetx1(), v.mouseHandlerGety1(),v.mouseHandlerGetx2() , v.mouseHandlerGety2(), v.mouseHandlerGetPointType());
+						v.repaintView();
+			break;
+			*/
 		}
 	}
 	

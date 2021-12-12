@@ -60,6 +60,13 @@ public class Model {
 		}
 		return slaskShape;
 	}
+	public DrawingShape moveShape(DrawingShape slaskShape, int newx1, int newy1, int newx2, int newy2, String PointType) {
+		if(slaskShape != null) {
+		slaskShape.move(newx1, newy2, newx2, newy2, PointType);
+		}
+		
+		return slaskShape;
+	}
 	public void writeObjectToFile() {
 		try {
 			 

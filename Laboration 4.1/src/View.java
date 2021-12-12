@@ -3,9 +3,6 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -112,10 +109,6 @@ public class View extends JFrame implements ActionListener {
 		DrawPanel.setBackground(Color.WHITE);
 		mainPanel.add(DrawPanel, BorderLayout.CENTER);
 	}
-	public void initMenuBar() {
-		viewMenuBar VMenuBar = new viewMenuBar(this);
-		this.setJMenuBar(VMenuBar.initMenuBar());
-	}
 	
 	public void drawResult(DrawingContainer DC) {
 		DrawPanel.setDc(DC);
@@ -159,6 +152,24 @@ public class View extends JFrame implements ActionListener {
 	public void triggerScaleShape() {
 		c.handleEvent("scaleShape");
 	}
+	public void moveThisShape() {
+		c.handleEvent("moveShape");
+	}
+	/*public int mouseHandlerGetx1() {
+		return MouseHandler.getOffsetNewX1();	
+	}
+	public int mouseHandlerGety1() {
+		return MouseHandler.getOffsetNewY1();	
+	}
+	public int mouseHandlerGetx2() {
+		return MouseHandler.getLineOffsetX2();	
+	}
+	public int mouseHandlerGety2() {
+		return MouseHandler.getLineOffsetY2();	
+	}
+	public String mouseHandlerGetPointType() {
+		return MouseHandler.getPointType();
+	}*/
 	public int getScrollDirection() {
 		return MouseHandler.getScrollDirection();
 	}
